@@ -1,0 +1,77 @@
+labviewOrchestra package
+========================
+
+Submodules
+----------
+
+labviewOrchestra.coilSetup module
+---------------------------------
+
+.. automodule:: labviewOrchestra.coilSetup
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+labviewOrchestra.conversions module
+-----------------------------------
+
+.. automodule:: labviewOrchestra.conversions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+labviewOrchestra.mwSetup module
+-------------------------------
+
+.. automodule:: labviewOrchestra.mwSetup
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+labviewOrchestra.mwSetupMeas module
+-----------------------------------
+
+.. automodule:: labviewOrchestra.mwSetupMeas
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+labviewOrchestra.saturatingSpectroscopy module
+----------------------------------------------
+
+.. automodule:: labviewOrchestra.saturatingSpectroscopy
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+labviewOrchestra.staticFuncs module
+-----------------------------------
+
+.. automodule:: labviewOrchestra.staticFuncs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+labviewOrchestra.virtual\_vna module
+------------------------------------
+
+.. automodule:: labviewOrchestra.virtual_vna
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+labviewOrchestra.vnaSetup module
+--------------------------------
+
+.. automodule:: labviewOrchestra.vnaSetup
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: labviewOrchestra
+   :members:
+   :undoc-members:
+   :show-inheritance:

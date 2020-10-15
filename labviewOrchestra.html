@@ -53,47 +53,93 @@
 <dt id="labviewOrchestra.coilSetup.CoilSetup">
 <em class="property">class </em><code class="sig-prename descclassname">labviewOrchestra.coilSetup.</code><code class="sig-name descname">CoilSetup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">resistance</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">type</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">multimeter</span><span class="p">:</span> <span class="n">machines.Keithley2100x64.Keithley2100x64</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.coilSetup.CoilSetup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>wraps a coil object. optionally with some feedback and unit conversion tools</p>
 <dl class="py attribute">
 <dt id="labviewOrchestra.coilSetup.CoilSetup.CRAWLING_RATE">
 <code class="sig-name descname">CRAWLING_RATE</code><em class="property"> = 2.7777777777777776e-07</em><a class="headerlink" href="#labviewOrchestra.coilSetup.CoilSetup.CRAWLING_RATE" title="Permalink to this definition">¶</a></dt>
-<dd><p>1 mA per hour</p>
+<dd><p>in other words, 1 mA per hour</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="labviewOrchestra.coilSetup.CoilSetup.CRAWLING_STEP">
-<code class="sig-name descname">CRAWLING_STEP</code><em class="property"> = 3e-07</em><a class="headerlink" href="#labviewOrchestra.coilSetup.CoilSetup.CRAWLING_STEP" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">CRAWLING_STEP</code><em class="property">: float</em><em class="property"> = 3e-07</em><a class="headerlink" href="#labviewOrchestra.coilSetup.CoilSetup.CRAWLING_STEP" title="Permalink to this definition">¶</a></dt>
 <dd><p>0.3 uA per step</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.coilSetup.CoilSetup.crawltoI_mA">
 <code class="sig-name descname">crawltoI_mA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Itarget_mA</span></em>, <em class="sig-param"><span class="n">report_progress</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span>float<span class="p">, </span>None<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.coilSetup.CoilSetup.crawltoI_mA" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>crawls the current to the target current by steps of <a class="reference internal" href="#labviewOrchestra.coilSetup.CoilSetup.CRAWLING_STEP" title="labviewOrchestra.coilSetup.CoilSetup.CRAWLING_STEP"><code class="xref py py-attr docutils literal notranslate"><span class="pre">CRAWLING_STEP</span></code></a>
+at <a class="reference internal" href="#labviewOrchestra.coilSetup.CoilSetup.CRAWLING_RATE" title="labviewOrchestra.coilSetup.CoilSetup.CRAWLING_RATE"><code class="xref py py-attr docutils literal notranslate"><span class="pre">CRAWLING_RATE</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>I_mA</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.coilSetup.CoilSetup.crawltoV">
 <code class="sig-name descname">crawltoV</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Vtarget</span></em>, <em class="sig-param"><span class="n">report_progress</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span>float<span class="p">, </span>None<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.coilSetup.CoilSetup.crawltoV" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>crawls the current to the target voltage by steps of <a class="reference internal" href="#labviewOrchestra.coilSetup.CoilSetup.CRAWLING_STEP" title="labviewOrchestra.coilSetup.CoilSetup.CRAWLING_STEP"><code class="xref py py-attr docutils literal notranslate"><span class="pre">CRAWLING_STEP</span></code></a>
+at <a class="reference internal" href="#labviewOrchestra.coilSetup.CoilSetup.CRAWLING_RATE" title="labviewOrchestra.coilSetup.CoilSetup.CRAWLING_RATE"><code class="xref py py-attr docutils literal notranslate"><span class="pre">CRAWLING_RATE</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>I_mA</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.coilSetup.CoilSetup.current_mA">
 <em class="property">property </em><code class="sig-name descname">current_mA</code><a class="headerlink" href="#labviewOrchestra.coilSetup.CoilSetup.current_mA" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>current in mA</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.coilSetup.CoilSetup.magfield_G">
 <em class="property">property </em><code class="sig-name descname">magfield_G</code><a class="headerlink" href="#labviewOrchestra.coilSetup.CoilSetup.magfield_G" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><em>estimated</em> magnetic field in Gauss</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.coilSetup.CoilSetup.ramptoI_mA">
 <code class="sig-name descname">ramptoI_mA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">I_mA</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.coilSetup.CoilSetup.ramptoI_mA" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>ramps[ramp of the .vi driver] to the target current.</p>
+<p>The variables <a class="reference internal" href="#labviewOrchestra.coilSetup.CoilSetup.CRAWLING_STEP" title="labviewOrchestra.coilSetup.CoilSetup.CRAWLING_STEP"><code class="xref py py-attr docutils literal notranslate"><span class="pre">CRAWLING_STEP</span></code></a> and <a class="reference internal" href="#labviewOrchestra.coilSetup.CoilSetup.CRAWLING_RATE" title="labviewOrchestra.coilSetup.CoilSetup.CRAWLING_RATE"><code class="xref py py-attr docutils literal notranslate"><span class="pre">CRAWLING_RATE</span></code></a> <strong>ARE NOT USED</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>I_mA</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.coilSetup.CoilSetup.voltage">
 <em class="property">property </em><code class="sig-name descname">voltage</code><a class="headerlink" href="#labviewOrchestra.coilSetup.CoilSetup.voltage" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>voltage in volts</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -105,6 +151,14 @@
 <dt id="labviewOrchestra.conversions.from_dBm">
 <code class="sig-prename descclassname">labviewOrchestra.conversions.</code><code class="sig-name descname">from_dBm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p_in_dBm</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.conversions.from_dBm" title="Permalink to this definition">¶</a></dt>
 <dd><p>dBm to pin_W. Inverse of <a class="reference internal" href="#labviewOrchestra.conversions.to_dBm" title="labviewOrchestra.conversions.to_dBm"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_dBm()</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>p_in_dBm</strong> – dBm power</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>in watts</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -112,12 +166,25 @@
 <code class="sig-prename descclassname">labviewOrchestra.conversions.</code><code class="sig-name descname">nphot_rwa</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">detuning_GHz</span></em>, <em class="sig-param"><span class="n">g_GHz</span></em>, <em class="sig-param"><span class="n">factor</span><span class="o">=</span><span class="default_value">0.1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.conversions.nphot_rwa" title="Permalink to this definition">¶</a></dt>
 <dd><p>at least <code class="docutils literal notranslate"><span class="pre">N=1</span></code>. returns <code class="docutils literal notranslate"><span class="pre">N</span></code> such that <code class="docutils literal notranslate"><span class="pre">g_GHz</span> <span class="pre">*</span> <span class="pre">sqrt(N)</span> <span class="pre">&lt;</span> <span class="pre">factor</span> <span class="pre">*</span> <span class="pre">detuning_GHz</span></code>.</p>
 <p>Attention : not neccesarily an integer photon number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>detuning_GHz</strong> – detuning</p></li>
+<li><p><strong>g_GHz</strong> – coupling</p></li>
+<li><p><strong>factor</strong> – unitless factor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>maximal number of photons while abiding by the inequality</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt id="labviewOrchestra.conversions.power_in">
 <code class="sig-prename descclassname">labviewOrchestra.conversions.</code><code class="sig-name descname">power_in</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">freq</span></em>, <em class="sig-param"><span class="n">f_res_</span></em>, <em class="sig-param"><span class="n">Qc_</span></em>, <em class="sig-param"><span class="n">Ql_</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.conversions.power_in" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>TODO could extend <code class="docutils literal notranslate"><span class="pre">Ql</span></code> to a function dependant on <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>n</strong> – Desired number of photons in the resonator</p></li>
@@ -135,8 +202,16 @@
 
 <dl class="py function">
 <dt id="labviewOrchestra.conversions.to_dBm">
-<code class="sig-prename descclassname">labviewOrchestra.conversions.</code><code class="sig-name descname">to_dBm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p_in</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.conversions.to_dBm" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">labviewOrchestra.conversions.</code><code class="sig-name descname">to_dBm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">power</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.conversions.to_dBm" title="Permalink to this definition">¶</a></dt>
 <dd><p>pin_W to dBm. Inverse of <a class="reference internal" href="#labviewOrchestra.conversions.from_dBm" title="labviewOrchestra.conversions.from_dBm"><code class="xref py py-func docutils literal notranslate"><span class="pre">from_dBm()</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>power</strong> – in watts</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dBm power</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -211,7 +286,15 @@ For child class that also includes readout, confer <code class="xref py py-class
 <dl class="py attribute">
 <dt id="labviewOrchestra.mwSetup.MwSetup.atten_to_sample">
 <code class="sig-name descname">atten_to_sample</code><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.atten_to_sample" title="Permalink to this definition">¶</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">Pin</span> <span class="pre">-</span> <span class="pre">Pout</span></code> in dBm, which is almost always negative</p>
+<dd><p><code class="docutils literal notranslate"><span class="pre">Pin</span> <span class="pre">-</span> <span class="pre">Pout</span></code> in dB, which is almost always negative</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>f_GHz</strong> – frequency in GHz</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>float, transfer function in dB</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -275,14 +358,15 @@ SPECIAL CARE: CHANGING qua.IO1 via set_IO1 will change the amplitude of the puls
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.configure_DC_corr">
 <code class="sig-name descname">configure_DC_corr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fint_GHz</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.configure_DC_corr" title="Permalink to this definition">¶</a></dt>
-<dd><p>roughly speaking, if calibration exists, (and TODO:  fint_GHz makes sense)</p>
+<dd><p>roughly speaking, if calibration exists:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MwSetup</span><span class="o">.</span><span class="n">static_qm</span><span class="o">.</span><span class="n">set_output_dc_offset_by_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qm_element_alias</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">DC</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">MwSetup</span><span class="o">.</span><span class="n">static_qm</span><span class="o">.</span><span class="n">set_output_dc_offset_by_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qm_element_alias</span><span class="p">,</span> <span class="s1">&#39;Q&#39;</span><span class="p">,</span> <span class="n">DC</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
+<p>future: fint_GHz to lookup best.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>fint_GHz</strong> – </p>
+<dd class="field-odd"><p><strong>fint_GHz</strong> – optional, if precised, will look for the closest correction. DC will need to be List[Tuple[float]]</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p></p>
@@ -293,7 +377,15 @@ SPECIAL CARE: CHANGING qua.IO1 via set_IO1 will change the amplitude of the puls
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.f_lo">
 <em class="property">property </em><code class="sig-name descname">f_lo</code><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.f_lo" title="Permalink to this definition">¶</a></dt>
-<dd><p>lo freq asked from mw directly the result is cached, cache invalidated upon changing of freqs</p>
+<dd><blockquote>
+<div><p>lo freq asked from mw directly the result is cached, cache invalidated upon changing of freqs.</p>
+<p><strong>Beware</strong>: might query the mw source if not cached, will be slow.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -361,8 +453,15 @@ and saves it into <code class="docutils literal notranslate"><span class="pre">s
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.mixer_calibration_compress">
-<code class="sig-name descname">mixer_calibration_compress</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fints_GHz</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.mixer_calibration_compress" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">mixer_calibration_compress</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fints_GHz</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>numpy.ndarray<span class="p">, </span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.mixer_calibration_compress" title="Permalink to this definition">¶</a></dt>
+<dd><p>When working with narrow band of scan, e.g. not scanning fpump or fmeas, we can prune off unused correction,
+so that less opx memory will be used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fints_GHz</strong> – np.ndarray or list, of the scanning range.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.mxa_quaprog">
@@ -406,6 +505,20 @@ The default program WILL be run with f_lo (read from mw_source) and f_int = MwSe
 <code class="sig-name descname">pout_set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.pout_set" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="py attribute">
+<dt id="labviewOrchestra.mwSetup.MwSetup.pout_to_pmxa">
+<code class="sig-name descname">pout_to_pmxa</code><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.pout_to_pmxa" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">Pmxa</span> <span class="pre">-</span> <span class="pre">Pout</span></code> in dB, which is almost always positive should the zva be working</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>f_GHz</strong> – frequency in GHz</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>float, transfer function in dB</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.qm_calop_str">
 <em class="property">property </em><code class="sig-name descname">qm_calop_str</code><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.qm_calop_str" title="Permalink to this definition">¶</a></dt>
@@ -415,15 +528,20 @@ The default program WILL be run with f_lo (read from mw_source) and f_int = MwSe
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.qm_element">
 <em class="property">property </em><code class="sig-name descname">qm_element</code><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.qm_element" title="Permalink to this definition">¶</a></dt>
-<dd><p>associated <a class="reference internal" href="qmAux.html#qmAux.config_helper.QMElement" title="qmAux.config_helper.QMElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">QMElement</span></code></a></p>
+<dd><p>returns associated <a class="reference internal" href="qmAux.html#qmAux.config_helper.QMElement" title="qmAux.config_helper.QMElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">QMElement</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>associated <a class="reference internal" href="qmAux.html#qmAux.config_helper.QMElement" title="qmAux.config_helper.QMElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">QMElement</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.qm_element_alias">
 <em class="property">property </em><code class="sig-name descname">qm_element_alias</code><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.qm_element_alias" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>str</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the string qm_element’s string alias</p>
 </dd>
 </dl>
 </dd></dl>

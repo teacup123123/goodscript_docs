@@ -155,17 +155,20 @@ For child class that also includes readout, confer <code class="xref py py-class
 <dl class="py attribute">
 <dt id="labviewOrchestra.mwSetup.MwSetup.BW_DEFAULT">
 <code class="sig-name descname">BW_DEFAULT</code><em class="property"> = 0.2</em><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.BW_DEFAULT" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>BW of the mxa</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="labviewOrchestra.mwSetup.MwSetup.FINT_DEFAULT">
 <code class="sig-name descname">FINT_DEFAULT</code><em class="property"> = 10000000</em><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.FINT_DEFAULT" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>used for mxa - power measurements</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.IQmod_or_direct_mw">
 <em class="property">property </em><code class="sig-name descname">IQmod_or_direct_mw</code><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.IQmod_or_direct_mw" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>is it a real IQ pipeline?</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="labviewOrchestra.mwSetup.MwSetup.MW_SRC_REF">
@@ -235,7 +238,7 @@ SPECIAL CARE: CHANGING qua.IO1 via set_IO1 will change the amplitude of the puls
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>dcIQ_opti, gain_Phase = (V_I,V_Q), (g,phase)</p>
+<dd class="field-even"><p>DCs, gPhis, result_pow.reshape((fs_intermediate_GHz.size, 3))</p>
 </dd>
 </dl>
 </dd></dl>
@@ -728,15 +731,28 @@ or set <code class="docutils literal notranslate"><span class="pre">save_verif</
 <em class="property">class </em><code class="sig-prename descclassname">labviewOrchestra.virtual_vna.</code><code class="sig-name descname">virtual_vna</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">meas</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas" title="labviewOrchestra.mwSetupMeas.MwSetupMeas">labviewOrchestra.mwSetupMeas.MwSetupMeas</a></span></em>, <em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">machines.KeysightVNAx64.KeysightVNAx64</span></code></p>
 <dl class="py attribute">
-<dt id="labviewOrchestra.virtual_vna.virtual_vna.MAX_SPAN_GHZ">
-<code class="sig-name descname">MAX_SPAN_GHZ</code><em class="property"> = 0.4</em><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.MAX_SPAN_GHZ" title="Permalink to this definition">¶</a></dt>
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.FIXED_RANGE_GHZ">
+<code class="sig-name descname">FIXED_RANGE_GHZ</code><em class="property"> = array([-0.2       , -0.19322034, -0.18644068, -0.17966102, -0.17288136,        -0.16610169, -0.15932203, -0.15254237, -0.14576271, -0.13898305,        -0.13220339, -0.12542373, -0.11864407, -0.11186441, -0.10508475,        -0.09830508, -0.09152542, -0.08474576, -0.0779661 , -0.07118644,        -0.06440678, -0.05762712, -0.05084746, -0.0440678 , -0.03728814,        -0.03050847, -0.02372881, -0.01694915, -0.01016949, -0.00338983,         0.00338983,  0.01016949,  0.01694915,  0.02372881,  0.03050847,         0.03728814,  0.0440678 ,  0.05084746,  0.05762712,  0.06440678,         0.07118644,  0.0779661 ,  0.08474576,  0.09152542,  0.09830508,         0.10508475,  0.11186441,  0.11864407,  0.12542373,  0.13220339,         0.13898305,  0.14576271,  0.15254237,  0.15932203,  0.16610169,         0.17288136,  0.17966102,  0.18644068,  0.19322034,  0.2       ])</em><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.FIXED_RANGE_GHZ" title="Permalink to this definition">¶</a></dt>
 <dd><p>virtual VNA driver, which wraps a <code class="xref py py-class docutils literal notranslate"><span class="pre">MwSetupMeas</span></code> object</p>
 </dd></dl>
 
-<dl class="py method">
-<dt id="labviewOrchestra.virtual_vna.virtual_vna.calibrate">
-<code class="sig-name descname">calibrate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flos_ghz</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.calibrate" title="Permalink to this definition">¶</a></dt>
+<dl class="py attribute">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.MAX_SPAN_GHZ">
+<code class="sig-name descname">MAX_SPAN_GHZ</code><em class="property"> = 0.4</em><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.MAX_SPAN_GHZ" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.calibrate_mixer">
+<code class="sig-name descname">calibrate_mixer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flos_ghz</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.calibrate_mixer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.calibrate_readout">
+<code class="sig-name descname">calibrate_readout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flos_ghz</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.calibrate_readout" title="Permalink to this definition">¶</a></dt>
+<dd><p>calibrates the readout correction for a range of
+:param flos_ghz:
+:return:</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.virtual_vna.virtual_vna.extract_amplitude">
@@ -784,6 +800,11 @@ or set <code class="docutils literal notranslate"><span class="pre">save_verif</
 <code class="sig-name descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>overrides: doesn’t talk to LabunaPera</p>
 </dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.retrieve_cal">
+<code class="sig-name descname">retrieve_cal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f_lo</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.retrieve_cal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.virtual_vna.virtual_vna.set_edelay">

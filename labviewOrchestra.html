@@ -305,23 +305,20 @@ For child class that also includes readout, confer <code class="xref py py-class
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.calibrate_mixer">
-<code class="sig-name descname">calibrate_mixer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fs_intermediate_GHz</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">sweep_time_s</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.07</span></em>, <em class="sig-param"><span class="n">report_progress</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span>float<span class="p">, </span>None<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dc_range</span><span class="o">=</span><span class="default_value">0.145</span></em>, <em class="sig-param"><span class="n">REMOVE_MULTIPLIER</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">resize_window</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span>float<span class="p">, </span>None<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">measure_spectrum_analyzer_power</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span>float<span class="p">, </span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.calibrate_mixer" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">calibrate_mixer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fs_intermediate_ghz</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">sweep_time_s</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.07</span></em>, <em class="sig-param"><span class="n">report_progress</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span>float<span class="p">, </span>None<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dc_range</span><span class="o">=</span><span class="default_value">0.145</span></em>, <em class="sig-param"><span class="n">remove_multiplier</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">resize_window</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span>float<span class="p">, </span>None<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">measure_spectrum_analyzer_power</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span>float<span class="p">, </span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.calibrate_mixer" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>optimizes DC V offset, as well as the phase/gain correction</strong>.
 Before calling this function, make sure that the microwave sources/spectrum analyzer are well configured/connected (sweep time[BW], lvo amplitude, frequency range)
 SPECIAL CARE: CHANGING qua.IO1 via set_IO1 will change the amplitude of the pulse!!!</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>REMOVE_MULTIPLIER</strong> – which band to remove. by default -1 to remove -fint_hz</p></li>
-<li><p><strong>cfg</strong> – dict used to open a <em>brand new</em> quantum Manager</p></li>
-<li><p><strong>operation</strong> – which pulse operation to play</p></li>
-<li><p><strong>qmElement</strong> – typically, qubit or resonator, the mixer associated will be automatically deduced.</p></li>
-<li><p><strong>resize_window</strong> – resize_window(fint_hz) resizes the mxa window so all 3 frequencies lvo(+/-fint_hz) are observable</p></li>
-<li><p><strong>measure_spectrum_analyzer_power</strong> – …(fint_hz) customized callback for measures the power on the marker at flo+fint_hz, returns dBm</p></li>
-<li><p><strong>fs_intermediate_GHz</strong> – intermediate frequencies</p></li>
+<li><p><strong>fs_intermediate_ghz</strong> – intermediate frequencies</p></li>
 <li><p><strong>sweep_time_s</strong> – sweep time in s so that the measurement doesn’t happen too fast</p></li>
 <li><p><strong>report_progress</strong> – if defined, will be used as callback to report on progress</p></li>
 <li><p><strong>dc_range</strong> – typically 0.145</p></li>
+<li><p><strong>remove_multiplier</strong> – which band to remove. by default -1 to remove -fint_hz</p></li>
+<li><p><strong>resize_window</strong> – resize_window(fint_hz) resizes the mxa window so all 3 frequencies lvo(+/-fint_hz) are observable</p></li>
+<li><p><strong>measure_spectrum_analyzer_power</strong> – …(fint_hz) customized callback for measures the power on the marker at flo+fint_hz, returns dBm</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

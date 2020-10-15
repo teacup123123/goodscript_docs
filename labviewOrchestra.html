@@ -47,8 +47,102 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="labvieworchestra-coilsetup-module">
-<h2>labviewOrchestra.coilSetup module<a class="headerlink" href="#labvieworchestra-coilsetup-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-labviewOrchestra.coilSetup">
+<span id="labvieworchestra-coilsetup-module"></span><h2>labviewOrchestra.coilSetup module<a class="headerlink" href="#module-labviewOrchestra.coilSetup" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="labviewOrchestra.coilSetup.CoilSetup">
+<em class="property">class </em><code class="sig-prename descclassname">labviewOrchestra.coilSetup.</code><code class="sig-name descname">CoilSetup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">resistance</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">type</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">multimeter</span><span class="p">:</span> <span class="n">machines.Keithley2100x64.Keithley2100x64</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.coilSetup.CoilSetup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>wraps a coil object. optionally with some feedback and unit conversion tools</p>
+<dl class="py attribute">
+<dt id="labviewOrchestra.coilSetup.CoilSetup.CRAWLING_RATE">
+<code class="sig-name descname">CRAWLING_RATE</code><em class="property"> = 2.7777777777777776e-07</em><a class="headerlink" href="#labviewOrchestra.coilSetup.CoilSetup.CRAWLING_RATE" title="Permalink to this definition">¶</a></dt>
+<dd><p>in other words, 1 mA per hour</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="labviewOrchestra.coilSetup.CoilSetup.CRAWLING_STEP">
+<code class="sig-name descname">CRAWLING_STEP</code><em class="property">: float</em><em class="property"> = 3e-07</em><a class="headerlink" href="#labviewOrchestra.coilSetup.CoilSetup.CRAWLING_STEP" title="Permalink to this definition">¶</a></dt>
+<dd><p>0.3 uA per step</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.coilSetup.CoilSetup.crawltoI_mA">
+<code class="sig-name descname">crawltoI_mA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Itarget_mA</span></em>, <em class="sig-param"><span class="n">report_progress</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span>float<span class="p">, </span>None<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.coilSetup.CoilSetup.crawltoI_mA" title="Permalink to this definition">¶</a></dt>
+<dd><p>crawls the current to the target current by steps of <a class="reference internal" href="#labviewOrchestra.coilSetup.CoilSetup.CRAWLING_STEP" title="labviewOrchestra.coilSetup.CoilSetup.CRAWLING_STEP"><code class="xref py py-attr docutils literal notranslate"><span class="pre">CRAWLING_STEP</span></code></a>
+at <a class="reference internal" href="#labviewOrchestra.coilSetup.CoilSetup.CRAWLING_RATE" title="labviewOrchestra.coilSetup.CoilSetup.CRAWLING_RATE"><code class="xref py py-attr docutils literal notranslate"><span class="pre">CRAWLING_RATE</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>I_mA</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.coilSetup.CoilSetup.crawltoV">
+<code class="sig-name descname">crawltoV</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Vtarget</span></em>, <em class="sig-param"><span class="n">report_progress</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span>float<span class="p">, </span>None<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.coilSetup.CoilSetup.crawltoV" title="Permalink to this definition">¶</a></dt>
+<dd><p>crawls the current to the target voltage by steps of <a class="reference internal" href="#labviewOrchestra.coilSetup.CoilSetup.CRAWLING_STEP" title="labviewOrchestra.coilSetup.CoilSetup.CRAWLING_STEP"><code class="xref py py-attr docutils literal notranslate"><span class="pre">CRAWLING_STEP</span></code></a>
+at <a class="reference internal" href="#labviewOrchestra.coilSetup.CoilSetup.CRAWLING_RATE" title="labviewOrchestra.coilSetup.CoilSetup.CRAWLING_RATE"><code class="xref py py-attr docutils literal notranslate"><span class="pre">CRAWLING_RATE</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>I_mA</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.coilSetup.CoilSetup.current_mA">
+<em class="property">property </em><code class="sig-name descname">current_mA</code><a class="headerlink" href="#labviewOrchestra.coilSetup.CoilSetup.current_mA" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>current in mA</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.coilSetup.CoilSetup.magfield_G">
+<em class="property">property </em><code class="sig-name descname">magfield_G</code><a class="headerlink" href="#labviewOrchestra.coilSetup.CoilSetup.magfield_G" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><em>estimated</em> magnetic field in Gauss</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.coilSetup.CoilSetup.ramptoI_mA">
+<code class="sig-name descname">ramptoI_mA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">I_mA</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.coilSetup.CoilSetup.ramptoI_mA" title="Permalink to this definition">¶</a></dt>
+<dd><p>ramps[ramp of the .vi driver] to the target current.</p>
+<p>The variables <a class="reference internal" href="#labviewOrchestra.coilSetup.CoilSetup.CRAWLING_STEP" title="labviewOrchestra.coilSetup.CoilSetup.CRAWLING_STEP"><code class="xref py py-attr docutils literal notranslate"><span class="pre">CRAWLING_STEP</span></code></a> and <a class="reference internal" href="#labviewOrchestra.coilSetup.CoilSetup.CRAWLING_RATE" title="labviewOrchestra.coilSetup.CoilSetup.CRAWLING_RATE"><code class="xref py py-attr docutils literal notranslate"><span class="pre">CRAWLING_RATE</span></code></a> <strong>ARE NOT USED</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>I_mA</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.coilSetup.CoilSetup.voltage">
+<em class="property">property </em><code class="sig-name descname">voltage</code><a class="headerlink" href="#labviewOrchestra.coilSetup.CoilSetup.voltage" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>voltage in volts</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-labviewOrchestra.conversions">
 <span id="labvieworchestra-conversions-module"></span><h2>labviewOrchestra.conversions module<a class="headerlink" href="#module-labviewOrchestra.conversions" title="Permalink to this headline">¶</a></h2>
@@ -712,20 +806,231 @@ or set <code class="docutils literal notranslate"><span class="pre">save_verif</
 </dd></dl>
 
 </div>
-<div class="section" id="labvieworchestra-saturatingspectroscopy-module">
-<h2>labviewOrchestra.saturatingSpectroscopy module<a class="headerlink" href="#labvieworchestra-saturatingspectroscopy-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-labviewOrchestra.saturatingSpectroscopy">
+<span id="labvieworchestra-saturatingspectroscopy-module"></span><h2>labviewOrchestra.saturatingSpectroscopy module<a class="headerlink" href="#module-labviewOrchestra.saturatingSpectroscopy" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="labviewOrchestra.saturatingSpectroscopy.AMPL_MEMORY_LIMIT">
+<code class="sig-prename descclassname">labviewOrchestra.saturatingSpectroscopy.</code><code class="sig-name descname">AMPL_MEMORY_LIMIT</code><em class="property"> = 40</em><a class="headerlink" href="#labviewOrchestra.saturatingSpectroscopy.AMPL_MEMORY_LIMIT" title="Permalink to this definition">¶</a></dt>
+<dd><p>how many <code class="docutils literal notranslate"><span class="pre">ampl</span></code> we can store in the opx</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="labviewOrchestra.saturatingSpectroscopy.RABI_FACTOR">
+<code class="sig-prename descclassname">labviewOrchestra.saturatingSpectroscopy.</code><code class="sig-name descname">RABI_FACTOR</code><em class="property"> = 10</em><a class="headerlink" href="#labviewOrchestra.saturatingSpectroscopy.RABI_FACTOR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="labviewOrchestra.saturatingSpectroscopy.RWA_FACTOR">
+<code class="sig-prename descclassname">labviewOrchestra.saturatingSpectroscopy.</code><code class="sig-name descname">RWA_FACTOR</code><em class="property"> = 0.15</em><a class="headerlink" href="#labviewOrchestra.saturatingSpectroscopy.RWA_FACTOR" title="Permalink to this definition">¶</a></dt>
+<dd><p>as in <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">*</span> <span class="pre">sqrt(N)</span> <span class="pre">&lt;</span> <span class="pre">RWA_FACTOR</span> <span class="pre">*</span> <span class="pre">delta</span></code></p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="labviewOrchestra.saturatingSpectroscopy.SAVES_PER_FINT_PUMP">
+<code class="sig-prename descclassname">labviewOrchestra.saturatingSpectroscopy.</code><code class="sig-name descname">SAVES_PER_FINT_PUMP</code><em class="property"> = 1</em><a class="headerlink" href="#labviewOrchestra.saturatingSpectroscopy.SAVES_PER_FINT_PUMP" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">1</span></code> means that the disembedding ON-OFF happens, else <code class="docutils literal notranslate"><span class="pre">2</span></code> means to save both ON and OFF</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="labviewOrchestra.saturatingSpectroscopy.SaturatingSpectroscopy">
+<code class="sig-prename descclassname">labviewOrchestra.saturatingSpectroscopy.</code><code class="sig-name descname">SaturatingSpectroscopy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pump</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#labviewOrchestra.mwSetup.MwSetup" title="labviewOrchestra.mwSetup.MwSetup">labviewOrchestra.mwSetup.MwSetup</a></span></em>, <em class="sig-param"><span class="n">meas</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#labviewOrchestra.mwSetup.MwSetup" title="labviewOrchestra.mwSetup.MwSetup">labviewOrchestra.mwSetup.MwSetup</a></span></em>, <em class="sig-param"><span class="n">op_pump_qb</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">SNR</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">t2_phi_ns</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">Qc</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">Ql</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">f_pump_range_ghz</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>float<span class="p">, </span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">f_res_ghz</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">g_ghz</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">save_partial</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.saturatingSpectroscopy.SaturatingSpectroscopy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt id="labviewOrchestra.saturatingSpectroscopy.T1S_NS">
+<code class="sig-prename descclassname">labviewOrchestra.saturatingSpectroscopy.</code><code class="sig-name descname">T1S_NS</code><em class="property"> = [500, 2000]</em><a class="headerlink" href="#labviewOrchestra.saturatingSpectroscopy.T1S_NS" title="Permalink to this definition">¶</a></dt>
+<dd><p>tot_meas_ns/T1S_NS[-1] will define the number of packets</p>
+</dd></dl>
+
 </div>
-<div class="section" id="labvieworchestra-staticfuncs-module">
-<h2>labviewOrchestra.staticFuncs module<a class="headerlink" href="#labvieworchestra-staticfuncs-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-labviewOrchestra.virtual_vna">
+<span id="labvieworchestra-virtual-vna-module"></span><h2>labviewOrchestra.virtual_vna module<a class="headerlink" href="#module-labviewOrchestra.virtual_vna" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna">
+<em class="property">class </em><code class="sig-prename descclassname">labviewOrchestra.virtual_vna.</code><code class="sig-name descname">virtual_vna</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">meas</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas" title="labviewOrchestra.mwSetupMeas.MwSetupMeas">labviewOrchestra.mwSetupMeas.MwSetupMeas</a></span></em>, <em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#labviewOrchestra.vnaSetup.VNASetup" title="labviewOrchestra.vnaSetup.VNASetup"><code class="xref py py-class docutils literal notranslate"><span class="pre">labviewOrchestra.vnaSetup.VNASetup</span></code></a></p>
+<dl class="py attribute">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.FIXED_RANGE_GHZ">
+<code class="sig-name descname">FIXED_RANGE_GHZ</code><em class="property"> = array([-0.2       , -0.19322034, -0.18644068, -0.17966102, -0.17288136,        -0.16610169, -0.15932203, -0.15254237, -0.14576271, -0.13898305,        -0.13220339, -0.12542373, -0.11864407, -0.11186441, -0.10508475,        -0.09830508, -0.09152542, -0.08474576, -0.0779661 , -0.07118644,        -0.06440678, -0.05762712, -0.05084746, -0.0440678 , -0.03728814,        -0.03050847, -0.02372881, -0.01694915, -0.01016949, -0.00338983,         0.00338983,  0.01016949,  0.01694915,  0.02372881,  0.03050847,         0.03728814,  0.0440678 ,  0.05084746,  0.05762712,  0.06440678,         0.07118644,  0.0779661 ,  0.08474576,  0.09152542,  0.09830508,         0.10508475,  0.11186441,  0.11864407,  0.12542373,  0.13220339,         0.13898305,  0.14576271,  0.15254237,  0.15932203,  0.16610169,         0.17288136,  0.17966102,  0.18644068,  0.19322034,  0.2       ])</em><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.FIXED_RANGE_GHZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>virtual VNASetup, which wraps a <code class="xref py py-class docutils literal notranslate"><span class="pre">MwSetupMeas</span></code> object</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.MAX_SPAN_GHZ">
+<code class="sig-name descname">MAX_SPAN_GHZ</code><em class="property"> = 0.4</em><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.MAX_SPAN_GHZ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.calibrate_mixer">
+<code class="sig-name descname">calibrate_mixer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flos_ghz</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.calibrate_mixer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.calibrate_readout">
+<code class="sig-name descname">calibrate_readout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flos_ghz</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.calibrate_readout" title="Permalink to this definition">¶</a></dt>
+<dd><p>calibrates the readout correction for a range of
+:param flos_ghz:
+:return:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.extract_phase">
+<code class="sig-name descname">extract_phase</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.extract_phase" title="Permalink to this definition">¶</a></dt>
+<dd><p>get function for ‘Extract Phase’</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.get_scan_amplitude">
+<code class="sig-name descname">get_scan_amplitude</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.get_scan_amplitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>get function for ‘getscanAmplitude’</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.launch_scan">
+<code class="sig-name descname">launch_scan</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.launch_scan" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.retrieve_cal">
+<code class="sig-name descname">retrieve_cal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f_lo</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.retrieve_cal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.set_BW">
+<code class="sig-name descname">set_BW</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.set_BW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.set_center_frequency">
+<code class="sig-name descname">set_center_frequency</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.set_center_frequency" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.set_number_of_points">
+<code class="sig-name descname">set_number_of_points</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.set_number_of_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.set_pin">
+<code class="sig-name descname">set_pin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.set_pin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.set_pout">
+<code class="sig-name descname">set_pout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.set_pout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.set_span_GHz">
+<code class="sig-name descname">set_span_GHz</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.set_span_GHz" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.try_lanuch_quaprog">
+<code class="sig-name descname">try_lanuch_quaprog</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.try_lanuch_quaprog" title="Permalink to this definition">¶</a></dt>
+<dd><p>qua.IO1.int used to request new scans</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="labvieworchestra-virtual-vna-module">
-<h2>labviewOrchestra.virtual_vna module<a class="headerlink" href="#labvieworchestra-virtual-vna-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-labviewOrchestra.vnaSetup">
+<span id="labvieworchestra-vnasetup-module"></span><h2>labviewOrchestra.vnaSetup module<a class="headerlink" href="#module-labviewOrchestra.vnaSetup" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="labviewOrchestra.vnaSetup.VNASetup">
+<em class="property">class </em><code class="sig-prename descclassname">labviewOrchestra.vnaSetup.</code><code class="sig-name descname">VNASetup</code><span class="sig-paren">(</span><em class="sig-param">vna: machines.KeysightVNAx64.KeysightVNAx64</em>, <em class="sig-param">BW: float = 100</em>, <em class="sig-param">edelay=30.0</em>, <em class="sig-param">sparam=21</em>, <em class="sig-param">atten_to_sample: Callable[None</em>, <em class="sig-param">float] = &lt;function VNASetup.&lt;lambda&gt;&gt;</em>, <em class="sig-param">gain_from_sample: Callable[None</em>, <em class="sig-param">float] = &lt;function VNASetup.&lt;lambda&gt;&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.vnaSetup.VNASetup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>wraps a VNA and calculates the corresponding powers</p>
+<dl class="py method">
+<dt id="labviewOrchestra.vnaSetup.VNASetup.extract_phase">
+<code class="sig-name descname">extract_phase</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.vnaSetup.VNASetup.extract_phase" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.vnaSetup.VNASetup.fit_Lorentz">
+<code class="sig-name descname">fit_Lorentz</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Qc</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.vnaSetup.VNASetup.fit_Lorentz" title="Permalink to this definition">¶</a></dt>
+<dd><p>infer from an internal call to get_scan the Lorentzienne parameters of the resonator:
+f_center[GHz], (Qt, Qc, Ql), s_peak[dB]
+Beware, function changes: f_center, BW, EDelay, and Phase Offset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>Qc</strong> – if you know Qc in advance, Qc will be considered as a fixed and known value.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>f_center[GHz], (Qt, Qc, Ql), s_peak[dB]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.vnaSetup.VNASetup.get_scan_amplitude">
+<code class="sig-name descname">get_scan_amplitude</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.vnaSetup.VNASetup.get_scan_amplitude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.vnaSetup.VNASetup.set_BW">
+<code class="sig-name descname">set_BW</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">BW</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.vnaSetup.VNASetup.set_BW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.vnaSetup.VNASetup.set_center_frequency">
+<code class="sig-name descname">set_center_frequency</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.vnaSetup.VNASetup.set_center_frequency" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.vnaSetup.VNASetup.set_number_of_points">
+<code class="sig-name descname">set_number_of_points</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.vnaSetup.VNASetup.set_number_of_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.vnaSetup.VNASetup.set_pin">
+<code class="sig-name descname">set_pin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pin</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.vnaSetup.VNASetup.set_pin" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.vnaSetup.VNASetup.set_pout">
+<code class="sig-name descname">set_pout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pout</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.vnaSetup.VNASetup.set_pout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.vnaSetup.VNASetup.set_snr_dB">
+<code class="sig-name descname">set_snr_dB</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">SNR_dB</span></em>, <em class="sig-param"><span class="n">Span_GHz</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">fcenter_GHz</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">iterations</span><span class="o">=</span><span class="default_value">49</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.vnaSetup.VNASetup.set_snr_dB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Does binary search on the BW to reach a SNR of SNR_dB
+Beware, function changes: BW, NBP, SPAN</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>SNR_dB</strong> – </p></li>
+<li><p><strong>Span_GHz</strong> – </p></li>
+<li><p><strong>fcenter_GHz</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.vnaSetup.VNASetup.set_span_GHz">
+<code class="sig-name descname">set_span_GHz</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">val</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.vnaSetup.VNASetup.set_span_GHz" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="labviewOrchestra.vnaSetup.VNASetup.vnaType_to_BWs">
+<code class="sig-name descname">vnaType_to_BWs</code><em class="property"> = {&lt;class 'machines.KeysightVNAx64.KeysightVNAx64'&gt;: [10, 15, 20, 30, 50, 70, 100, 150, 200, 300, 500, 700, 1000, 1500, 2000, 3000, 5000, 7000, 10000, 15000, 20000, 30000, 50000, 70000, 100000, 150000, 200000, 280000, 360000, 600000, 1000000], &lt;class 'NoneType'&gt;: [10, 15, 20, 30, 50, 70, 100, 150, 200, 300, 500, 700, 1000, 1500, 2000, 3000, 5000, 7000, 10000, 15000, 20000, 30000, 50000, 70000, 100000, 150000, 200000, 280000, 360000, 600000, 1000000]}</em><a class="headerlink" href="#labviewOrchestra.vnaSetup.VNASetup.vnaType_to_BWs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="labvieworchestra-vnasetup-module">
-<h2>labviewOrchestra.vnaSetup module<a class="headerlink" href="#labvieworchestra-vnasetup-module" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-labviewOrchestra">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-labviewOrchestra" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -740,15 +1045,14 @@ or set <code class="docutils literal notranslate"><span class="pre">save_verif</
   <ul>
 <li><a class="reference internal" href="#">labviewOrchestra package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#labvieworchestra-coilsetup-module">labviewOrchestra.coilSetup module</a></li>
+<li><a class="reference internal" href="#module-labviewOrchestra.coilSetup">labviewOrchestra.coilSetup module</a></li>
 <li><a class="reference internal" href="#module-labviewOrchestra.conversions">labviewOrchestra.conversions module</a></li>
 <li><a class="reference internal" href="#module-labviewOrchestra.mwSetup">labviewOrchestra.mwSetup module</a></li>
 <li><a class="reference internal" href="#module-labviewOrchestra.mwSetupMeas">labviewOrchestra.mwSetupMeas module</a></li>
-<li><a class="reference internal" href="#labvieworchestra-saturatingspectroscopy-module">labviewOrchestra.saturatingSpectroscopy module</a></li>
-<li><a class="reference internal" href="#labvieworchestra-staticfuncs-module">labviewOrchestra.staticFuncs module</a></li>
-<li><a class="reference internal" href="#labvieworchestra-virtual-vna-module">labviewOrchestra.virtual_vna module</a></li>
-<li><a class="reference internal" href="#labvieworchestra-vnasetup-module">labviewOrchestra.vnaSetup module</a></li>
-<li><a class="reference internal" href="#module-contents">Module contents</a></li>
+<li><a class="reference internal" href="#module-labviewOrchestra.saturatingSpectroscopy">labviewOrchestra.saturatingSpectroscopy module</a></li>
+<li><a class="reference internal" href="#module-labviewOrchestra.virtual_vna">labviewOrchestra.virtual_vna module</a></li>
+<li><a class="reference internal" href="#module-labviewOrchestra.vnaSetup">labviewOrchestra.vnaSetup module</a></li>
+<li><a class="reference internal" href="#module-labviewOrchestra">Module contents</a></li>
 </ul>
 </li>
 </ul>

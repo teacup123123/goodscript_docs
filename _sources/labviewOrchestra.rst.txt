@@ -44,14 +44,6 @@ labviewOrchestra.saturatingSpectroscopy module
    :undoc-members:
    :show-inheritance:
 
-labviewOrchestra.staticFuncs module
------------------------------------
-
-.. automodule:: labviewOrchestra.staticFuncs
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 labviewOrchestra.virtual\_vna module
 ------------------------------------
 

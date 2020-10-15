@@ -100,16 +100,17 @@
 </div>
 <div class="section" id="module-labviewOrchestra.conversions">
 <span id="labvieworchestra-conversions-module"></span><h2>labviewOrchestra.conversions module<a class="headerlink" href="#module-labviewOrchestra.conversions" title="Permalink to this headline">¶</a></h2>
+<p>This module contains conversions functions, (almost) fully documented</p>
 <dl class="py function">
 <dt id="labviewOrchestra.conversions.from_dBm">
 <code class="sig-prename descclassname">labviewOrchestra.conversions.</code><code class="sig-name descname">from_dBm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p_in_dBm</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.conversions.from_dBm" title="Permalink to this definition">¶</a></dt>
-<dd><p>dBm to pin_W. See also <code class="xref py py-func docutils literal notranslate"><span class="pre">labviewOrchestra.to_dBm()</span></code></p>
+<dd><p>dBm to pin_W. Inverse of <a class="reference internal" href="#labviewOrchestra.conversions.to_dBm" title="labviewOrchestra.conversions.to_dBm"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_dBm()</span></code></a></p>
 </dd></dl>
 
 <dl class="py function">
 <dt id="labviewOrchestra.conversions.nphot_rwa">
 <code class="sig-prename descclassname">labviewOrchestra.conversions.</code><code class="sig-name descname">nphot_rwa</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">detuning_GHz</span></em>, <em class="sig-param"><span class="n">g_GHz</span></em>, <em class="sig-param"><span class="n">factor</span><span class="o">=</span><span class="default_value">0.1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.conversions.nphot_rwa" title="Permalink to this definition">¶</a></dt>
-<dd><p>at least 1. returns <code class="docutils literal notranslate"><span class="pre">N</span></code> such that <code class="docutils literal notranslate"><span class="pre">g_GHz</span> <span class="pre">*</span> <span class="pre">sqrt(N)</span> <span class="pre">&lt;</span> <span class="pre">factor</span> <span class="pre">*</span> <span class="pre">detuning_GHz</span></code>.</p>
+<dd><p>at least <code class="docutils literal notranslate"><span class="pre">N=1</span></code>. returns <code class="docutils literal notranslate"><span class="pre">N</span></code> such that <code class="docutils literal notranslate"><span class="pre">g_GHz</span> <span class="pre">*</span> <span class="pre">sqrt(N)</span> <span class="pre">&lt;</span> <span class="pre">factor</span> <span class="pre">*</span> <span class="pre">detuning_GHz</span></code>.</p>
 <p>Attention : not neccesarily an integer photon number</p>
 </dd></dl>
 
@@ -135,7 +136,7 @@
 <dl class="py function">
 <dt id="labviewOrchestra.conversions.to_dBm">
 <code class="sig-prename descclassname">labviewOrchestra.conversions.</code><code class="sig-name descname">to_dBm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p_in</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.conversions.to_dBm" title="Permalink to this definition">¶</a></dt>
-<dd><p>pin_W to dBm <a class="reference internal" href="#labviewOrchestra.conversions.from_dBm" title="labviewOrchestra.conversions.from_dBm"><code class="xref py py-func docutils literal notranslate"><span class="pre">from_dBm()</span></code></a></p>
+<dd><p>pin_W to dBm. Inverse of <a class="reference internal" href="#labviewOrchestra.conversions.from_dBm" title="labviewOrchestra.conversions.from_dBm"><code class="xref py py-func docutils literal notranslate"><span class="pre">from_dBm()</span></code></a></p>
 </dd></dl>
 
 </div>
@@ -320,7 +321,8 @@ SPECIAL CARE: CHANGING qua.IO1 via set_IO1 will change the amplitude of the puls
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.load_mixer_cal_from">
 <code class="sig-name descname">load_mixer_cal_from</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">loaded</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.load_mixer_cal_from" title="Permalink to this definition">¶</a></dt>
-<dd><p>conforms to the format outputed from calibrate_mixer</p>
+<dd><p>conforms to the format outputed by <a class="reference internal" href="#labviewOrchestra.mwSetup.MwSetup.calibrate_mixer" title="labviewOrchestra.mwSetup.MwSetup.calibrate_mixer"><code class="xref py py-func docutils literal notranslate"><span class="pre">calibrate_mixer()</span></code></a> into the format of <a class="reference internal" href="#labviewOrchestra.mwSetup.MwSetup.mixer_calibration" title="labviewOrchestra.mwSetup.MwSetup.mixer_calibration"><code class="xref py py-func docutils literal notranslate"><span class="pre">mixer_calibration()</span></code></a>
+and saves it into <code class="docutils literal notranslate"><span class="pre">self.mixer_calibration</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -329,7 +331,7 @@ SPECIAL CARE: CHANGING qua.IO1 via set_IO1 will change the amplitude of the puls
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>res_cal_frequencies_GHz, Dc&lt;1 pair only&gt;, gPhis, amps</p>
+<dd class="field-even"><p>res_cal_frequencies_GHz[F], Dcs_mean[2], gPhis[Fx2], amps[F]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -413,7 +415,7 @@ The default program WILL be run with f_lo (read from mw_source) and f_int = MwSe
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.qm_element">
 <em class="property">property </em><code class="sig-name descname">qm_element</code><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.qm_element" title="Permalink to this definition">¶</a></dt>
-<dd><p>associated <code class="xref py py-class docutils literal notranslate"><span class="pre">QMElement</span></code></p>
+<dd><p>associated <a class="reference internal" href="qmAux.html#qmAux.config_helper.QMElement" title="qmAux.config_helper.QMElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">QMElement</span></code></a></p>
 </dd></dl>
 
 <dl class="py method">

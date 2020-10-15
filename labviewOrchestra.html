@@ -103,12 +103,14 @@
 <dl class="py function">
 <dt id="labviewOrchestra.conversions.from_dBm">
 <code class="sig-prename descclassname">labviewOrchestra.conversions.</code><code class="sig-name descname">from_dBm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p_in_dBm</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.conversions.from_dBm" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>dBm to pin_W. See also <code class="xref py py-func docutils literal notranslate"><span class="pre">labviewOrchestra.to_dBm()</span></code></p>
+</dd></dl>
 
 <dl class="py function">
 <dt id="labviewOrchestra.conversions.nphot_rwa">
 <code class="sig-prename descclassname">labviewOrchestra.conversions.</code><code class="sig-name descname">nphot_rwa</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">detuning_GHz</span></em>, <em class="sig-param"><span class="n">g_GHz</span></em>, <em class="sig-param"><span class="n">factor</span><span class="o">=</span><span class="default_value">0.1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.conversions.nphot_rwa" title="Permalink to this definition">¶</a></dt>
-<dd><p>not not neccesarily an integer photon number</p>
+<dd><p>at least 1. returns <code class="docutils literal notranslate"><span class="pre">N</span></code> such that <code class="docutils literal notranslate"><span class="pre">g_GHz</span> <span class="pre">*</span> <span class="pre">sqrt(N)</span> <span class="pre">&lt;</span> <span class="pre">factor</span> <span class="pre">*</span> <span class="pre">detuning_GHz</span></code>.</p>
+<p>Attention : not neccesarily an integer photon number</p>
 </dd></dl>
 
 <dl class="py function">
@@ -133,7 +135,8 @@
 <dl class="py function">
 <dt id="labviewOrchestra.conversions.to_dBm">
 <code class="sig-prename descclassname">labviewOrchestra.conversions.</code><code class="sig-name descname">to_dBm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p_in</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.conversions.to_dBm" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>pin_W to dBm <a class="reference internal" href="#labviewOrchestra.conversions.from_dBm" title="labviewOrchestra.conversions.from_dBm"><code class="xref py py-func docutils literal notranslate"><span class="pre">from_dBm()</span></code></a></p>
+</dd></dl>
 
 </div>
 <div class="section" id="module-labviewOrchestra.mwSetup">
@@ -238,7 +241,7 @@ SPECIAL CARE: CHANGING qua.IO1 via set_IO1 will change the amplitude of the puls
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>DCs, gPhis, result_pow.reshape((fs_intermediate_GHz.size, 3))</p>
+<dd class="field-even"><p>DCs[Fx2], gPhis[Fx2], result_pows[Fx3] (main;lo;removed)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -404,12 +407,14 @@ The default program WILL be run with f_lo (read from mw_source) and f_int = MwSe
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.qm_calop_str">
 <em class="property">property </em><code class="sig-name descname">qm_calop_str</code><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.qm_calop_str" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>what operation[str] this element typically calibrates with, in the cfg dict</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.qm_element">
 <em class="property">property </em><code class="sig-name descname">qm_element</code><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.qm_element" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>associated <code class="xref py py-class docutils literal notranslate"><span class="pre">QMElement</span></code></p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.qm_element_alias">

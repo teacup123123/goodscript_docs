@@ -1,12 +1,13 @@
 
-<!DOCTYPE html>
+
+<!doctype html>
 
 <html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>labviewOrchestra package &#8212; goodScripts  documentation</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -14,9 +15,13 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/language_data.js"></script>
-    
+    <script src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -179,7 +184,7 @@ For child class that also includes readout, confer <code class="xref py py-class
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.align">
-<em class="property">static </em><code class="sig-name descname">align</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mws_pump</span></em>, <em class="sig-param"><span class="n">mws_meas</span></em>, <em class="sig-param"><span class="n">dgin_res_trigger</span><span class="p">:</span> <span class="n">qmAux.config_helper.DigitalInput</span></em>, <em class="sig-param"><span class="n">MOVE_CURSOR</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">WAIT_MEAS</span><span class="o">=</span><span class="default_value">0.4</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.align" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">align</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mws_pump</span></em>, <em class="sig-param"><span class="n">mws_meas</span></em>, <em class="sig-param"><span class="n">dgin_res_trigger</span><span class="p">:</span> <span class="n"><a class="reference internal" href="qmAux.html#qmAux.config_helper.DigitalInput" title="qmAux.config_helper.DigitalInput">qmAux.config_helper.DigitalInput</a></span></em>, <em class="sig-param"><span class="n">MOVE_CURSOR</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">WAIT_MEAS</span><span class="o">=</span><span class="default_value">0.4</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.align" title="Permalink to this definition">¶</a></dt>
 <dd><p>aligns the <em>beginning</em> of two MwSetups pump and meas. Returns the pump [resp. meas] electrical delay in units of
 4 ns. Recommendation: calculate difference between the two and if big, introduce a wait systematically.</p>
 <dl class="field-list simple">
@@ -237,7 +242,7 @@ SPECIAL CARE: CHANGING qua.IO1 via set_IO1 will change the amplitude of the puls
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.calibrate_switch_delay">
-<code class="sig-name descname">calibrate_switch_delay</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">digital_input_switch</span><span class="p">:</span> <span class="n">qmAux.config_helper.DigitalInput</span></em>, <em class="sig-param"><span class="n">trigger_op</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>str<span class="p">, </span>qmAux.config_helper.QMElement<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">apply</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.calibrate_switch_delay" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">calibrate_switch_delay</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">digital_input_switch</span><span class="p">:</span> <span class="n"><a class="reference internal" href="qmAux.html#qmAux.config_helper.DigitalInput" title="qmAux.config_helper.DigitalInput">qmAux.config_helper.DigitalInput</a></span></em>, <em class="sig-param"><span class="n">trigger_op</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="qmAux.html#qmAux.config_helper.QMElement" title="qmAux.config_helper.QMElement">qmAux.config_helper.QMElement</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">apply</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.calibrate_switch_delay" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -533,6 +538,25 @@ screw the preamp offset… etc). cf the variable <code class="docutils literal n
 </dd></dl>
 
 <dl class="py method">
+<dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.calibrate_readout_correction">
+<code class="sig-name descname">calibrate_readout_correction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">fs_int_GHz_calibration</span></em>, <em class="sig-param"><span class="n">pulselen_ns</span><span class="o">=</span><span class="default_value">4000</span></em>, <em class="sig-param"><span class="n">tot_pulse_len_ns</span><span class="o">=</span><span class="default_value">200000000</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.calibrate_readout_correction" title="Permalink to this definition">¶</a></dt>
+<dd><p>sets <code class="docutils literal notranslate"><span class="pre">op_readout_res</span></code> to pulselen_ns, then calibrates with a BW of <code class="docutils literal notranslate"><span class="pre">tot_pulse_len_ns</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>op_readout_res</strong> – string, which operation to use</p></li>
+<li><p><strong>fs_int_GHz_calibration</strong> – intermediate frequencies</p></li>
+<li><p><strong>pulselen_ns</strong> – how long should a measurement be</p></li>
+<li><p><strong>tot_pulse_len_ns</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>fs_int_GHz_calibration, gphis = np.concatenate([gs, phis]) , amps</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.fgpa_meas">
 <em class="property">property </em><code class="sig-name descname">fgpa_meas</code><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.fgpa_meas" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -556,7 +580,7 @@ screw the preamp offset… etc). cf the variable <code class="docutils literal n
 over the range defined by <code class="docutils literal notranslate"><span class="pre">f_scan_GHz</span></code> and remove it to have a correct phase behavior.
 We then determine the required measurement time N * <code class="docutils literal notranslate"><span class="pre">meas_pulse_length_ns</span></code> that allows to
 detect a shift of the resonator df_GHz with a given <code class="docutils literal notranslate"><span class="pre">SNR</span></code> (in amplitude).</p>
-<p>The function returns</p>
+<p>The function returns:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>the total measurement time = N * <code class="docutils literal notranslate"><span class="pre">meas_pulse_length_ns</span></code>, calculated to detect a shift of the resonator
@@ -694,16 +718,26 @@ or set <code class="docutils literal notranslate"><span class="pre">save_verif</
 </dd></dl>
 
 </div>
-<div class="section" id="module-labviewOrchestra.staticFuncs">
-<span id="labvieworchestra-staticfuncs-module"></span><h2>labviewOrchestra.staticFuncs module<a class="headerlink" href="#module-labviewOrchestra.staticFuncs" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="labvieworchestra-staticfuncs-module">
+<h2>labviewOrchestra.staticFuncs module<a class="headerlink" href="#labvieworchestra-staticfuncs-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-labviewOrchestra.virtual_vna">
 <span id="labvieworchestra-virtual-vna-module"></span><h2>labviewOrchestra.virtual_vna module<a class="headerlink" href="#module-labviewOrchestra.virtual_vna" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="labviewOrchestra.virtual_vna.virtual_vna">
-<em class="property">class </em><code class="sig-prename descclassname">labviewOrchestra.virtual_vna.</code><code class="sig-name descname">virtual_vna</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">meas</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas" title="labviewOrchestra.mwSetupMeas.MwSetupMeas">labviewOrchestra.mwSetupMeas.MwSetupMeas</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">labviewOrchestra.virtual_vna.</code><code class="sig-name descname">virtual_vna</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">meas</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas" title="labviewOrchestra.mwSetupMeas.MwSetupMeas">labviewOrchestra.mwSetupMeas.MwSetupMeas</a></span></em>, <em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">machines.KeysightVNAx64.KeysightVNAx64</span></code></p>
-<p>virtual VNA driver, which wraps a <code class="xref py py-class docutils literal notranslate"><span class="pre">MwSetupMeas</span></code> object</p>
+<dl class="py attribute">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.MAX_SPAN_GHZ">
+<code class="sig-name descname">MAX_SPAN_GHZ</code><em class="property"> = 0.4</em><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.MAX_SPAN_GHZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>virtual VNA driver, which wraps a <code class="xref py py-class docutils literal notranslate"><span class="pre">MwSetupMeas</span></code> object</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.calibrate">
+<code class="sig-name descname">calibrate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flos_ghz</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.calibrate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt id="labviewOrchestra.virtual_vna.virtual_vna.extract_amplitude">
 <code class="sig-name descname">extract_amplitude</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.extract_amplitude" title="Permalink to this definition">¶</a></dt>
@@ -735,9 +769,21 @@ or set <code class="docutils literal notranslate"><span class="pre">save_verif</
 </dd></dl>
 
 <dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>overrides: doesn’t talk to LabunaPera</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="labviewOrchestra.virtual_vna.virtual_vna.launch_scan">
 <code class="sig-name descname">launch_scan</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.launch_scan" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.load">
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>overrides: doesn’t talk to LabunaPera</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.virtual_vna.virtual_vna.set_edelay">
@@ -918,7 +964,7 @@ Beware, function changes: BW, NBP, SPAN</p>
 <li><a class="reference internal" href="#module-labviewOrchestra.mwSetup">labviewOrchestra.mwSetup module</a></li>
 <li><a class="reference internal" href="#module-labviewOrchestra.mwSetupMeas">labviewOrchestra.mwSetupMeas module</a></li>
 <li><a class="reference internal" href="#module-labviewOrchestra.saturatingSpectroscopy">labviewOrchestra.saturatingSpectroscopy module</a></li>
-<li><a class="reference internal" href="#module-labviewOrchestra.staticFuncs">labviewOrchestra.staticFuncs module</a></li>
+<li><a class="reference internal" href="#labvieworchestra-staticfuncs-module">labviewOrchestra.staticFuncs module</a></li>
 <li><a class="reference internal" href="#module-labviewOrchestra.virtual_vna">labviewOrchestra.virtual_vna module</a></li>
 <li><a class="reference internal" href="#module-labviewOrchestra.vnaSetup">labviewOrchestra.vnaSetup module</a></li>
 <li><a class="reference internal" href="#module-labviewOrchestra">Module contents</a></li>

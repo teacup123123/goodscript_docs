@@ -1,0 +1,45 @@
+qmAux package
+=============
+
+Submodules
+----------
+
+qmAux.AuxiliaryFunctions module
+-------------------------------
+
+.. automodule:: qmAux.AuxiliaryFunctions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+qmAux.config\_helper module
+---------------------------
+
+.. automodule:: qmAux.config_helper
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+qmAux.hybrid\_tools module
+--------------------------
+
+.. automodule:: qmAux.hybrid_tools
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+qmAux.tools module
+------------------
+
+.. automodule:: qmAux.tools
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: qmAux
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -269,6 +269,7 @@ For child class that also includes readout, confer <code class="xref py py-class
 <em class="property">static </em><code class="sig-name descname">align</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mws_pump</span></em>, <em class="sig-param"><span class="n">mws_meas</span></em>, <em class="sig-param"><span class="n">dgin_res_trigger</span><span class="p">:</span> <span class="n"><a class="reference internal" href="qmAux.html#qmAux.config_helper.DigitalInput" title="qmAux.config_helper.DigitalInput">qmAux.config_helper.DigitalInput</a></span></em>, <em class="sig-param"><span class="n">MOVE_CURSOR</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">WAIT_MEAS</span><span class="o">=</span><span class="default_value">0.4</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.align" title="Permalink to this definition">¶</a></dt>
 <dd><p>aligns the <em>beginning</em> of two MwSetups pump and meas. Returns the pump [resp. meas] electrical delay in units of
 4 ns. Recommendation: calculate difference between the two and if big, introduce a wait systematically.</p>
+<p>TODO No standalone script…</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -412,7 +413,7 @@ and saves it into <code class="docutils literal notranslate"><span class="pre">s
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>fints_ghz[F], DcIs[F], DcQs[F], gs[F], phis[F], amps[F]</p>
+<dd class="field-even"><p>6-tuple of F-arrays : fints_ghz[F], DcIs[F], DcQs[F], gs[F], phis[F], amps[F]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -575,8 +576,9 @@ The default program WILL be run with f_lo (read from mw_source) and f_int = <a c
 <dt id="labviewOrchestra.mwSetup.MwSetup.qm_set_DC_corr">
 <code class="sig-name descname">qm_set_DC_corr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fint_GHz</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.qm_set_DC_corr" title="Permalink to this definition">¶</a></dt>
 <dd><p>roughly speaking, if calibration exists:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MwSetup</span><span class="o">.</span><span class="n">static_qm</span><span class="o">.</span><span class="n">set_output_dc_offset_by_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qm_element_alias</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">DCI</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">MwSetup</span><span class="o">.</span><span class="n">static_qm</span><span class="o">.</span><span class="n">set_output_dc_offset_by_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qm_element_alias</span><span class="p">,</span> <span class="s1">&#39;Q&#39;</span><span class="p">,</span> <span class="n">DCQ</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qm</span> <span class="o">=</span> <span class="n">MwSetup</span><span class="o">.</span><span class="n">static_qm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qm</span><span class="o">.</span><span class="n">set_output_dc_offset_by_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qm_element_alias</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">DCI</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qm</span><span class="o">.</span><span class="n">set_output_dc_offset_by_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qm_element_alias</span><span class="p">,</span> <span class="s1">&#39;Q&#39;</span><span class="p">,</span> <span class="n">DCQ</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>future: fint_GHz to lookup best.</p>
@@ -590,7 +592,17 @@ The default program WILL be run with f_lo (read from mw_source) and f_int = <a c
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.reload_cfg">
 <em class="property">static </em><code class="sig-name descname">reload_cfg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.reload_cfg" title="Permalink to this definition">¶</a></dt>
-<dd><p>re-submits the config dict file to the qm manager, and returns the <code class="docutils literal notranslate"><span class="pre">qm</span></code> object</p>
+<dd><p>re-submits the config dict file to the qm manager, and returns the <code class="docutils literal notranslate"><span class="pre">qm</span></code> object.</p>
+<p>Equivalent code:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MwSetup</span><span class="o">.</span><span class="n">static_qm</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">open_qm</span><span class="p">(</span><span class="n">qx</span><span class="o">.</span><span class="n">singleton_dict</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">return</span> <span class="n">MwSetup</span><span class="o">.</span><span class="n">static_qm</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the qm object initiated</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -605,17 +617,15 @@ The default program WILL be run with f_lo (read from mw_source) and f_int = <a c
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.setDCoutput_in_cfg">
-<code class="sig-name descname">setDCoutput_in_cfg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">DC</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.setDCoutput_in_cfg" title="Permalink to this definition">¶</a></dt>
-<dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">conI</span><span class="p">]</span><span class="o">.</span><span class="n">analog_outputs</span><span class="p">[</span><span class="n">portI</span><span class="p">][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DC</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<code class="sig-name descname">setDCoutput_in_cfg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">DC</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.setDCoutput_in_cfg" title="Permalink to this definition">¶</a></dt>
+<dd><p>In the config dict, changes the DC offset of the port going toward the QMElement and <strong>reloads</strong>,</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">conI</span><span class="p">]</span><span class="o">.</span><span class="n">analog_outputs</span><span class="p">[</span><span class="n">portI</span><span class="p">][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DC</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">conQ</span><span class="p">]</span><span class="o">.</span><span class="n">analog_outputs</span><span class="p">[</span><span class="n">portQ</span><span class="p">][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DC</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>DC</strong> – </p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
+<dd class="field-odd"><p><strong>DC</strong> – 2-List of floats</p>
 </dd>
 </dl>
 </dd></dl>
@@ -623,7 +633,20 @@ The default program WILL be run with f_lo (read from mw_source) and f_int = <a c
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.set_pump_pulse_len">
 <code class="sig-name descname">set_pump_pulse_len</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">op_pump</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">new_len_ns</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.set_pump_pulse_len" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns critical components of the Config affected: qb, pulse</p>
+<dd><blockquote>
+<div><p>returns critical components of the Config affected: qb, pulse</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>op_pump</strong> – </p></li>
+<li><p><strong>new_len_ns</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>qb[<a class="reference internal" href="qmAux.html#qmAux.config_helper.QMElement" title="qmAux.config_helper.QMElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">QMElement</span></code></a>], pulse[<a class="reference internal" href="qmAux.html#qmAux.config_helper.Pulse" title="qmAux.config_helper.Pulse"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pulse</span></code></a>]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py attribute">
@@ -864,7 +887,20 @@ or set <code class="docutils literal notranslate"><span class="pre">save_verif</
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.set_pump_pulse_len">
 <code class="sig-name descname">set_pump_pulse_len</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.set_pump_pulse_len" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns critical components of the Config affected: qb, pulse</p>
+<dd><blockquote>
+<div><p>returns critical components of the Config affected: qb, pulse</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>op_pump</strong> – </p></li>
+<li><p><strong>new_len_ns</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>qb[<a class="reference internal" href="qmAux.html#qmAux.config_helper.QMElement" title="qmAux.config_helper.QMElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">QMElement</span></code></a>], pulse[<a class="reference internal" href="qmAux.html#qmAux.config_helper.Pulse" title="qmAux.config_helper.Pulse"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pulse</span></code></a>]</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

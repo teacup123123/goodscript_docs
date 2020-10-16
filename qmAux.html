@@ -103,6 +103,8 @@
 <span id="qmaux-config-helper-module"></span><h2>qmAux.config_helper module<a class="headerlink" href="#module-qmAux.config_helper" title="Permalink to this headline">¶</a></h2>
 <p>This modules contains helper classes that represent the complex config API of Quantum Machines.</p>
 <p>With this you will not make syntax errors or unparseable config dicts.</p>
+<p>This module is supposed to evolute according to the config API in a way that is the most backward compatible to
+old scripts. i.e. even if the API changes, the user should see little to no changes.</p>
 <dl class="simple">
 <dt>It also contains conversions to the native dict, as well as some serialization-save helper functions:</dt><dd><ul class="simple">
 <li><p><a class="reference internal" href="#qmAux.config_helper.cfg_to_pretty" title="qmAux.config_helper.cfg_to_pretty"><code class="xref py py-func docutils literal notranslate"><span class="pre">cfg_to_pretty()</span></code></a></p></li>
@@ -307,10 +309,8 @@ An intinsic negative delay of 143+-2nsec exists by default</p>
 <dt id="qmAux.config_helper.Digital_waveform">
 <em class="property">class </em><code class="sig-prename descclassname">qmAux.config_helper.</code><code class="sig-name descname">Digital_waveform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">alias</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">samples</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Tuple<span class="p">[</span>int<span class="p">, </span>int<span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qmAux.config_helper.Digital_waveform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<blockquote>
-<div><p>(list of tuples) specifying the analog data according to following code:</p>
-</div></blockquote>
-<p>The first entry of each tuple is 0 or 1 and corresponds to the digital value,
+<p>(list of tuples) specifying the analog data according to following code:
+The first entry of each tuple is 0 or 1 and corresponds to the digital value,
 and the second entry is the length in nsec to play the value, in steps of 1.
 If value is 0, the value will be played to end of pulse.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cfg</span><span class="o">.</span><span class="n">digital_waveforms</span><span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;samples&#39;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span> <span class="p">}</span> <span class="c1"># original syntax</span>
@@ -331,10 +331,8 @@ If value is 0, the value will be played to end of pulse.</p>
 <dt id="qmAux.config_helper.Integration_weight">
 <em class="property">class </em><code class="sig-prename descclassname">qmAux.config_helper.</code><code class="sig-name descname">Integration_weight</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">alias</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">cosine</span></em>, <em class="sig-param"><span class="n">sine</span></em>, <em class="sig-param"><span class="n">alt_code</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>str<span class="p">, </span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#qmAux.config_helper.Integration_weight" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<blockquote>
-<div><p>specification of a set of measurement integration weights. Result of integration will be:</p>
-</div></blockquote>
-<p>sum over i of (W_cosine[i]cos[wt[i]] + W_sine[i]sin[wt[i]])analog[i].
+<p>specification of a set of measurement integration weights. Result of integration will be:
+sum over i of (W_cosine[i]cos[wt[i]] + W_sine[i]sin[wt[i]])analog[i].
 Here:
 w is the angular frequency of the quantum element, and analog[i] is the analog data acquired by the controller.
 W_cosine, W_sine are the vectors associated with the ‘cosine’ and ‘sine’ keys, respectively.
@@ -671,10 +669,8 @@ Inspired from Lorentz transformation</p>
 <dl class="py function">
 <dt id="qmAux.tools.format_IQcs_into_IQ">
 <code class="sig-prename descclassname">qmAux.tools.</code><code class="sig-name descname">format_IQcs_into_IQ</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Ic</span></em>, <em class="sig-param"><span class="n">Is</span></em>, <em class="sig-param"><span class="n">Qc</span></em>, <em class="sig-param"><span class="n">Qs</span></em>, <em class="sig-param"><span class="n">gs</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">Phis</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">amplification</span><span class="o">=</span><span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#qmAux.tools.format_IQcs_into_IQ" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>given the equivalent reformulations (<code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">Phi</span></code>, <code class="docutils literal notranslate"><span class="pre">amp</span></code>) of the correction matrix, calculate <code class="docutils literal notranslate"><span class="pre">I</span></code> and <code class="docutils literal notranslate"><span class="pre">Q</span></code></p>
-</div></blockquote>
-<p>from the quadratures <code class="docutils literal notranslate"><span class="pre">Ic</span></code>, <code class="docutils literal notranslate"><span class="pre">Is</span></code>, <code class="docutils literal notranslate"><span class="pre">Qc</span></code>, <code class="docutils literal notranslate"><span class="pre">Qs</span></code></p>
+<dd><p>given the equivalent reformulations (<code class="docutils literal notranslate"><span class="pre">g</span></code>, <code class="docutils literal notranslate"><span class="pre">Phi</span></code>, <code class="docutils literal notranslate"><span class="pre">amp</span></code>) of the correction matrix, calculate <code class="docutils literal notranslate"><span class="pre">I</span></code> and <code class="docutils literal notranslate"><span class="pre">Q</span></code>
+from the quadratures <code class="docutils literal notranslate"><span class="pre">Ic</span></code>, <code class="docutils literal notranslate"><span class="pre">Is</span></code>, <code class="docutils literal notranslate"><span class="pre">Qc</span></code>, <code class="docutils literal notranslate"><span class="pre">Qs</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">

@@ -301,18 +301,26 @@ For child class that also includes readout, confer <code class="xref py py-class
 <dt id="labviewOrchestra.mwSetup.MwSetup.cal_with">
 <em class="property">property </em><code class="sig-name descname">cal_with</code><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.cal_with" title="Permalink to this definition">¶</a></dt>
 <dd><p>this property is used in calib switch delay</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>cal_operation, associated qm element</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Tuple[str, qx.QMElement]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.calibrate_mixer">
-<code class="sig-name descname">calibrate_mixer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fs_intermediate_ghz</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">sweep_time_s</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.07</span></em>, <em class="sig-param"><span class="n">report_progress</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span>float<span class="p">, </span>None<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dc_range</span><span class="o">=</span><span class="default_value">0.145</span></em>, <em class="sig-param"><span class="n">remove_multiplier</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">resize_window</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span>float<span class="p">, </span>None<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">measure_spectrum_analyzer_power</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span>float<span class="p">, </span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.calibrate_mixer" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">calibrate_mixer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fints_ghz</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">sweep_time_s</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.07</span></em>, <em class="sig-param"><span class="n">report_progress</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span>float<span class="p">, </span>None<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dc_range</span><span class="o">=</span><span class="default_value">0.145</span></em>, <em class="sig-param"><span class="n">remove_multiplier</span><span class="o">=</span><span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">resize_window</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span>float<span class="p">, </span>None<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">measure_spectrum_analyzer_power</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span>float<span class="p">, </span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.calibrate_mixer" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>optimizes DC V offset, as well as the phase/gain correction</strong>.
 Before calling this function, make sure that the microwave sources/spectrum analyzer are well configured/connected (sweep time[BW], lvo amplitude, frequency range)
 SPECIAL CARE: CHANGING qua.IO1 via set_IO1 will change the amplitude of the pulse!!!</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>fs_intermediate_ghz</strong> – intermediate frequencies</p></li>
+<li><p><strong>fints_ghz</strong> – intermediate frequencies in GHz</p></li>
 <li><p><strong>sweep_time_s</strong> – sweep time in s so that the measurement doesn’t happen too fast</p></li>
 <li><p><strong>report_progress</strong> – if defined, will be used as callback to report on progress</p></li>
 <li><p><strong>dc_range</strong> – typically 0.145</p></li>
@@ -322,7 +330,7 @@ SPECIAL CARE: CHANGING qua.IO1 via set_IO1 will change the amplitude of the puls
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>DCs[Fx2], gPhis[Fx2], result_pows[Fx3] (main;lo;removed)</p>
+<dd class="field-even"><p>fints_ghz[F], DCs[Fx2], gPhis[Fx2], result_pows[Fx3] (main;lo;removed)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -334,7 +342,7 @@ SPECIAL CARE: CHANGING qua.IO1 via set_IO1 will change the amplitude of the puls
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>digital_input_switch</strong> – which digital port to calibrate</p></li>
-<li><p><strong>trigger_op</strong> – the trigger operation for the spectrum analyser</p></li>
+<li><p><strong>trigger_op</strong> (<em>Tuple</em><em>[</em><em>str</em><em>, </em><em>qx.QMElement</em><em>]</em>) – the trigger operation for the spectrum analyser</p></li>
 <li><p><strong>apply</strong> – apply change automatically to config after finishing</p></li>
 </ul>
 </dd>
@@ -349,21 +357,12 @@ SPECIAL CARE: CHANGING qua.IO1 via set_IO1 will change the amplitude of the puls
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.change_intfreq">
-<code class="sig-name descname">change_intfreq</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.change_intfreq" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="labviewOrchestra.mwSetup.MwSetup.configure_DC_corr">
-<code class="sig-name descname">configure_DC_corr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fint_GHz</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.configure_DC_corr" title="Permalink to this definition">¶</a></dt>
-<dd><p>roughly speaking, if calibration exists:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MwSetup</span><span class="o">.</span><span class="n">static_qm</span><span class="o">.</span><span class="n">set_output_dc_offset_by_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qm_element_alias</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">DC</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">MwSetup</span><span class="o">.</span><span class="n">static_qm</span><span class="o">.</span><span class="n">set_output_dc_offset_by_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qm_element_alias</span><span class="p">,</span> <span class="s1">&#39;Q&#39;</span><span class="p">,</span> <span class="n">DC</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>future: fint_GHz to lookup best.</p>
+<code class="sig-name descname">change_intfreq</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">new_fint_ghz</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.change_intfreq" title="Permalink to this definition">¶</a></dt>
+<dd><p>In IQ mode : update the frequency of <a class="reference internal" href="#labviewOrchestra.mwSetup.MwSetup.mxa_quaprog" title="labviewOrchestra.mwSetup.MwSetup.mxa_quaprog"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mxa_quaprog()</span></code></a> through <code class="docutils literal notranslate"><span class="pre">qm.IO1</span></code></p>
+<p>In CW mode :</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>fint_GHz</strong> – optional, if precised, will look for the closest correction. DC will need to be List[Tuple[float]]</p>
+<dd class="field-odd"><p><strong>new_fint_ghz</strong> – new intermediate frequency in ghz</p>
 </dd>
 </dl>
 </dd></dl>
@@ -377,24 +376,7 @@ SPECIAL CARE: CHANGING qua.IO1 via set_IO1 will change the amplitude of the puls
 </div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="labviewOrchestra.mwSetup.MwSetup.getDCinput_in_cfg">
-<code class="sig-name descname">getDCinput_in_cfg</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.getDCinput_in_cfg" title="Permalink to this definition">¶</a></dt>
-<dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">DCI</span> <span class="o">=</span> <span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">mixInputs</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">analog_inputs</span><span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">mixInputs</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">DCQ</span> <span class="o">=</span> <span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">mixInputs</span><span class="o">.</span><span class="n">Q</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">analog_inputs</span><span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">mixInputs</span><span class="o">.</span><span class="n">Q</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>DC</strong> – </p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>DCI,DCQ</p>
+<dd class="field-odd"><p>float, ghz</p>
 </dd>
 </dl>
 </dd></dl>
@@ -402,39 +384,35 @@ SPECIAL CARE: CHANGING qua.IO1 via set_IO1 will change the amplitude of the puls
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.get_pow">
 <code class="sig-name descname">get_pow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fint_GHz</span></em>, <em class="sig-param"><span class="n">sleep</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.get_pow" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>if <code class="docutils literal notranslate"><span class="pre">fint_GHz</span></code> is within the mxa window, then tries a marker measurement</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sleep</strong> – if too small, then the mxa will not reflect correct values</p></li>
+<li><p><strong>fint_GHz</strong> – frequency to put marker</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.load_mixer_cal_from">
 <code class="sig-name descname">load_mixer_cal_from</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">loaded</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.load_mixer_cal_from" title="Permalink to this definition">¶</a></dt>
 <dd><p>conforms to the format outputed by <a class="reference internal" href="#labviewOrchestra.mwSetup.MwSetup.calibrate_mixer" title="labviewOrchestra.mwSetup.MwSetup.calibrate_mixer"><code class="xref py py-func docutils literal notranslate"><span class="pre">calibrate_mixer()</span></code></a> into the format of <a class="reference internal" href="#labviewOrchestra.mwSetup.MwSetup.mixer_calibration" title="labviewOrchestra.mwSetup.MwSetup.mixer_calibration"><code class="xref py py-func docutils literal notranslate"><span class="pre">mixer_calibration()</span></code></a>
 and saves it into <code class="docutils literal notranslate"><span class="pre">self.mixer_calibration</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">path</span></code> used only when <code class="docutils literal notranslate"><span class="pre">loaded</span></code> undefined</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>loaded</strong> – </p></li>
-<li><p><strong>path</strong> – </p></li>
+<li><p><strong>loaded</strong> – fints_ghz[F], DCs[Fx2], gPhis[Fx2], result_pows[Fx3] (main;lo;removed)</p></li>
+<li><p><strong>path</strong> – pickle file path containing <code class="docutils literal notranslate"><span class="pre">loaded</span></code></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>res_cal_frequencies_GHz[F], Dcs_mean[2], gPhis[Fx2], amps[F]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="labviewOrchestra.mwSetup.MwSetup.load_mixer_readout_cal_from">
-<code class="sig-name descname">load_mixer_readout_cal_from</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">loaded</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.load_mixer_readout_cal_from" title="Permalink to this definition">¶</a></dt>
-<dd><p>conforms to the format outputed from calibrate_mixer</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>loaded</strong> – </p></li>
-<li><p><strong>path</strong> – </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>res_cal_frequencies_GHz, Dc&lt;1 pair only&gt;, gPhis, amps</p>
+<dd class="field-even"><p>fints_ghz[F], DcIs[F], DcQs[F], gs[F], phis[F], amps[F]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -442,17 +420,22 @@ and saves it into <code class="docutils literal notranslate"><span class="pre">s
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.mixer_calibration">
 <em class="property">property </em><code class="sig-name descname">mixer_calibration</code><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.mixer_calibration" title="Permalink to this definition">¶</a></dt>
-<dd><p>under the form fints_GHz, Dc&lt;1 pair only&gt;, gPhis, amps</p>
+<dd><p>returns the 6-tuple of F-sized arrays</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>fints_ghz[F], DcIs[F], DcQs[F], gs[F], phis[F], amps[F]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.mixer_calibration_compress">
-<code class="sig-name descname">mixer_calibration_compress</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fints_GHz</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>numpy.ndarray<span class="p">, </span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.mixer_calibration_compress" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">mixer_calibration_compress</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fints_ghz</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>numpy.ndarray<span class="p">, </span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.mixer_calibration_compress" title="Permalink to this definition">¶</a></dt>
 <dd><p>When working with narrow band of scan, e.g. not scanning fpump or fmeas, we can prune off unused correction,
 so that less opx memory will be used.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>fints_GHz</strong> – np.ndarray or list, of the scanning range.</p>
+<dd class="field-odd"><p><strong>fints_ghz</strong> – np.ndarray or list, of the scanning range.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -463,41 +446,85 @@ so that less opx memory will be used.</p>
 <dd><p>freshly generated qua.program, depending on the presence of the calibration, applies the cal before playing.
 You can optionally use qm.IO1 to sweep fint_hz and see if the power is good. Typically wait 0.1 s
 (theoretically 0.002s enough) for the update to be effective</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>counter</strong> – number of calibration pulses before polling <code class="docutils literal notranslate"><span class="pre">qm.IO1</span></code> for updates in each cycle</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a qua program</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.pin">
 <code class="sig-name descname">pin</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.pin" title="Permalink to this definition">¶</a></dt>
-<dd><p>power entering the sample</p>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>dBm, power entering the sample</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.pin_set">
 <code class="sig-name descname">pin_set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.pin_set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> – dBm, power entering the sample</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.pmxa">
 <code class="sig-name descname">pmxa</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.pmxa" title="Permalink to this definition">¶</a></dt>
 <dd><p>power read by mxa.
-The default program WILL be run with f_lo (read from mw_source) and f_int = MwSetup.FINT_DEFAULT</p>
+The default program WILL be run with f_lo (read from mw_source) and f_int = <a class="reference internal" href="#labviewOrchestra.mwSetup.MwSetup.FINT_DEFAULT" title="labviewOrchestra.mwSetup.MwSetup.FINT_DEFAULT"><code class="xref py py-attr docutils literal notranslate"><span class="pre">FINT_DEFAULT</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>float, dBm</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.pmxa_set">
 <code class="sig-name descname">pmxa_set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target</span></em>, <em class="sig-param"><span class="n">new_feedback</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.pmxa_set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>if IQ mode : tries to adapt self.pulsar to reach target on pmxa</p>
+<p>if CW mode : tries to adapt self.mw to reach target on pmxa</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> – target power pmxa</p></li>
+<li><p><strong>new_feedback</strong> – whether to feedback or not</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.pout">
 <code class="sig-name descname">pout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.pout" title="Permalink to this definition">¶</a></dt>
-<dd><p>power just before entering the fridge</p>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>dBm, power just before entering the fridge</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.pout_set">
 <code class="sig-name descname">pout_set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.pout_set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> – dBm, power to set just before entering the fridge</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="labviewOrchestra.mwSetup.MwSetup.pout_to_pmxa">
@@ -516,7 +543,11 @@ The default program WILL be run with f_lo (read from mw_source) and f_int = MwSe
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.qm_calop_str">
 <em class="property">property </em><code class="sig-name descname">qm_calop_str</code><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.qm_calop_str" title="Permalink to this definition">¶</a></dt>
-<dd><p>what operation[str] this element typically calibrates with, in the cfg dict</p>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>what operation[str] this element typically calibrates with, in the cfg dict</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -541,6 +572,22 @@ The default program WILL be run with f_lo (read from mw_source) and f_int = MwSe
 </dd></dl>
 
 <dl class="py method">
+<dt id="labviewOrchestra.mwSetup.MwSetup.qm_set_DC_corr">
+<code class="sig-name descname">qm_set_DC_corr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fint_GHz</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.qm_set_DC_corr" title="Permalink to this definition">¶</a></dt>
+<dd><p>roughly speaking, if calibration exists:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">MwSetup</span><span class="o">.</span><span class="n">static_qm</span><span class="o">.</span><span class="n">set_output_dc_offset_by_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qm_element_alias</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="n">DCI</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MwSetup</span><span class="o">.</span><span class="n">static_qm</span><span class="o">.</span><span class="n">set_output_dc_offset_by_element</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">qm_element_alias</span><span class="p">,</span> <span class="s1">&#39;Q&#39;</span><span class="p">,</span> <span class="n">DCQ</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>future: fint_GHz to lookup best.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fint_GHz</strong> – optional, if precised, will look for the closest correction. DC will need to be List[Tuple[float]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.reload_cfg">
 <em class="property">static </em><code class="sig-name descname">reload_cfg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.reload_cfg" title="Permalink to this definition">¶</a></dt>
 <dd><p>re-submits the config dict file to the qm manager, and returns the <code class="docutils literal notranslate"><span class="pre">qm</span></code> object</p>
@@ -549,21 +596,9 @@ The default program WILL be run with f_lo (read from mw_source) and f_int = MwSe
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.resize_window">
 <code class="sig-name descname">resize_window</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fint_GHz</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.resize_window" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="labviewOrchestra.mwSetup.MwSetup.setDCinput_in_cfg">
-<code class="sig-name descname">setDCinput_in_cfg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">DC</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.setDCinput_in_cfg" title="Permalink to this definition">¶</a></dt>
-<dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">mixInputs</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">analog_inputs</span><span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">mixInputs</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DC</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">mixInputs</span><span class="o">.</span><span class="n">Q</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">analog_inputs</span><span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">mixInputs</span><span class="o">.</span><span class="n">Q</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DC</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</pre></div>
-</div>
-<dl class="field-list simple">
+<dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>DC</strong> – </p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
+<dd class="field-odd"><p><strong>fint_GHz</strong> – center the mxa marker window onto this frequency</p>
 </dd>
 </dl>
 </dd></dl>
@@ -571,8 +606,8 @@ The default program WILL be run with f_lo (read from mw_source) and f_int = MwSe
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.setDCoutput_in_cfg">
 <code class="sig-name descname">setDCoutput_in_cfg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">DC</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.setDCoutput_in_cfg" title="Permalink to this definition">¶</a></dt>
-<dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">mixInputs</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">analog_outputs</span><span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">mixInputs</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DC</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">mixInputs</span><span class="o">.</span><span class="n">Q</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">analog_outputs</span><span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">mixInputs</span><span class="o">.</span><span class="n">Q</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DC</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">conI</span><span class="p">]</span><span class="o">.</span><span class="n">analog_outputs</span><span class="p">[</span><span class="n">portI</span><span class="p">][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DC</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">conQ</span><span class="p">]</span><span class="o">.</span><span class="n">analog_outputs</span><span class="p">[</span><span class="n">portQ</span><span class="p">][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DC</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -684,15 +719,46 @@ screw the preamp offset… etc). cf the variable <code class="docutils literal n
 <dd></dd></dl>
 
 <dl class="py method">
+<dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.getDC_readout_in_cfg">
+<code class="sig-name descname">getDC_readout_in_cfg</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.getDC_readout_in_cfg" title="Permalink to this definition">¶</a></dt>
+<dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">conI</span><span class="p">]</span><span class="o">.</span><span class="n">analog_inputs</span><span class="p">[</span><span class="n">portI</span><span class="p">][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DC</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">conQ</span><span class="p">]</span><span class="o">.</span><span class="n">analog_inputs</span><span class="p">[</span><span class="n">portQ</span><span class="p">][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DC</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>[DCI, DCQ]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.get_meas_pulse_info">
 <code class="sig-name descname">get_meas_pulse_info</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.get_meas_pulse_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>returns critical components of the Config: res, pulse, intwc, intws</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.load_mixer_readout_cal_from">
+<code class="sig-name descname">load_mixer_readout_cal_from</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">loaded</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.load_mixer_readout_cal_from" title="Permalink to this definition">¶</a></dt>
+<dd><p>conforms to the format outputed from <code class="xref py py-meth docutils literal notranslate"><span class="pre">calibrate_mixer_readout()</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>loaded</strong> – optional, output of <code class="xref py py-meth docutils literal notranslate"><span class="pre">calibrate_mixer_readout()</span></code></p></li>
+<li><p><strong>path</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>res_cal_frequencies_GHz, Dc&lt;1 pair only&gt;, gPhis, amps</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.mixer_calibration_readout">
 <em class="property">property </em><code class="sig-name descname">mixer_calibration_readout</code><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.mixer_calibration_readout" title="Permalink to this definition">¶</a></dt>
-<dd><p>under the form fints_GHz, Dc&lt;1 pair only&gt;, gPhis, amps</p>
+<dd><p>under the form fints_ghz, Dc&lt;1 pair only&gt;, gPhis, amps</p>
 </dd></dl>
 
 <dl class="py method">
@@ -767,6 +833,24 @@ or set <code class="docutils literal notranslate"><span class="pre">save_verif</
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>fs_GHz, compl, (f_center, Qfac, edelay, s_peak, phase_peak)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.setDC_readout_in_cfg">
+<code class="sig-name descname">setDC_readout_in_cfg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">DC</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.setDC_readout_in_cfg" title="Permalink to this definition">¶</a></dt>
+<dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">conI</span><span class="p">]</span><span class="o">.</span><span class="n">analog_inputs</span><span class="p">[</span><span class="n">portI</span><span class="p">][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DC</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">conQ</span><span class="p">]</span><span class="o">.</span><span class="n">analog_inputs</span><span class="p">[</span><span class="n">portQ</span><span class="p">][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DC</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MwSetup</span><span class="o">.</span><span class="n">reload_cfg</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>DC</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
 </dd>
 </dl>
 </dd></dl>
@@ -859,19 +943,6 @@ or set <code class="docutils literal notranslate"><span class="pre">save_verif</
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="labviewOrchestra.virtual_vna.virtual_vna.calibrate_mixer">
-<code class="sig-name descname">calibrate_mixer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flos_ghz</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.calibrate_mixer" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="labviewOrchestra.virtual_vna.virtual_vna.calibrate_readout">
-<code class="sig-name descname">calibrate_readout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flos_ghz</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.calibrate_readout" title="Permalink to this definition">¶</a></dt>
-<dd><p>calibrates the readout correction for a range of
-:param flos_ghz:
-:return:</p>
-</dd></dl>
-
-<dl class="py method">
 <dt id="labviewOrchestra.virtual_vna.virtual_vna.extract_phase">
 <code class="sig-name descname">extract_phase</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.extract_phase" title="Permalink to this definition">¶</a></dt>
 <dd><p>get function for ‘Extract Phase’</p>
@@ -887,6 +958,19 @@ or set <code class="docutils literal notranslate"><span class="pre">save_verif</
 <dt id="labviewOrchestra.virtual_vna.virtual_vna.launch_scan">
 <code class="sig-name descname">launch_scan</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.launch_scan" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.range_calibrate_mixer">
+<code class="sig-name descname">range_calibrate_mixer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flos_ghz</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.range_calibrate_mixer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.range_calibrate_readout">
+<code class="sig-name descname">range_calibrate_readout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flos_ghz</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.range_calibrate_readout" title="Permalink to this definition">¶</a></dt>
+<dd><p>calibrates the readout correction for a range of
+:param flos_ghz:
+:return:</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.virtual_vna.virtual_vna.retrieve_cal">
@@ -926,7 +1010,8 @@ or set <code class="docutils literal notranslate"><span class="pre">save_verif</
 <dl class="py method">
 <dt id="labviewOrchestra.virtual_vna.virtual_vna.try_lanuch_quaprog">
 <code class="sig-name descname">try_lanuch_quaprog</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.try_lanuch_quaprog" title="Permalink to this definition">¶</a></dt>
-<dd><p>qua.IO1.int used to request new scans</p>
+<dd><p>qua.IO1.float used to upload correction data
+qua.IO1.int used to request new scans</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>None</p>

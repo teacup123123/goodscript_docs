@@ -695,57 +695,57 @@ The default program WILL be run with f_lo (read from mw_source) and f_int = <a c
 <p>class including additional funcionalities for readout</p>
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.calibrate_readout">
-<code class="sig-name descname">calibrate_readout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">f_int_GHz</span></em>, <em class="sig-param"><span class="n">thresh_factor</span><span class="o">=</span><span class="default_value">0.6321205588285577</span></em>, <em class="sig-param"><span class="n">start_at</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">temp_pulse_len</span><span class="o">=</span><span class="default_value">2000</span></em>, <em class="sig-param"><span class="n">cal_preamp_or_benchmark</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">fs_int_GHz_calibration</span><span class="p">:</span> <span class="n">numpy.ndarray</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.calibrate_readout" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">calibrate_readout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f_int_GHz</span></em>, <em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">thresh_factor</span><span class="o">=</span><span class="default_value">0.6321205588285577</span></em>, <em class="sig-param"><span class="n">start_at</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">temp_pulse_len</span><span class="o">=</span><span class="default_value">2000</span></em>, <em class="sig-param"><span class="n">cal_preamp_or_benchmark</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">fs_int_GHz_calibration</span><span class="p">:</span> <span class="n">numpy.ndarray</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.calibrate_readout" title="Permalink to this definition">¶</a></dt>
 <dd><p>measures the delay defined by the <code class="docutils literal notranslate"><span class="pre">THRESH_FACTOR</span></code> * peak signal amplitude.
 mark this as <code class="docutils literal notranslate"><span class="pre">cal_preamp_or_benchmark</span></code> as <code class="docutils literal notranslate"><span class="pre">True</span></code> if you want to benchmark correction (lo leakaage…,
 screw the preamp offset… etc). cf the variable <code class="docutils literal notranslate"><span class="pre">_typical_code</span></code></p>
+<p>Philosophy: DC offset is shared across the different fints, <strong>unless</strong> if IQ saturation point reached…
+meaning that we are putting a hell lot of power</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f_int_GHz</strong> – which fint_hz to use to calculate time of flight</p></li>
-<li><p><strong>cal_preamp_or_benchmark</strong> – mark this as <code class="docutils literal notranslate"><span class="pre">True</span></code> if you want to</p></li>
 <li><p><strong>op_readout_res</strong> – name of the readout operation as specified in the Config</p></li>
 <li><p><strong>thresh_factor</strong> – see above</p></li>
+<li><p><strong>cal_preamp_or_benchmark</strong> – mark this as <code class="docutils literal notranslate"><span class="pre">True</span></code> if you want to</p></li>
 <li><p><strong>start_at</strong> – minimum time of flight during the measurement</p></li>
 <li><p><strong>temp_pulse_len</strong> – temporary pulse length only used in this calibration</p></li>
 <li><p><strong>fs_int_GHz_calibration</strong> – optionally calibrate the readout g Phi amp</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>measured_TOF, duration_meas, amps[V] = sqrt(Vi^2+Vq^2) , (DCI, DCQ)</p>
+<dd class="field-even"><p>Either:
+- measured_TOF, duration_meas, amps[V] = sqrt(Vi^2+Vq^2), (DCI, DCQ)
+- (…,) +  outputs of <a class="reference internal" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.calibrate_readout_correction" title="labviewOrchestra.mwSetupMeas.MwSetupMeas.calibrate_readout_correction"><code class="xref py py-meth docutils literal notranslate"><span class="pre">calibrate_readout_correction()</span></code></a>  if <code class="docutils literal notranslate"><span class="pre">fs_int_GHz_calibration</span></code> provided</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.calibrate_readout_correction">
-<code class="sig-name descname">calibrate_readout_correction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">fs_int_GHz_calibration</span></em>, <em class="sig-param"><span class="n">pulselen_ns</span><span class="o">=</span><span class="default_value">4000</span></em>, <em class="sig-param"><span class="n">tot_pulse_len_ns</span><span class="o">=</span><span class="default_value">200000000</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.calibrate_readout_correction" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">calibrate_readout_correction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fs_int_GHz_calibration</span></em>, <em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pulselen_ns</span><span class="o">=</span><span class="default_value">4000</span></em>, <em class="sig-param"><span class="n">tot_pulse_len_ns</span><span class="o">=</span><span class="default_value">200000000</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.calibrate_readout_correction" title="Permalink to this definition">¶</a></dt>
 <dd><p>sets <code class="docutils literal notranslate"><span class="pre">op_readout_res</span></code> to pulselen_ns, then calibrates with a BW of <code class="docutils literal notranslate"><span class="pre">tot_pulse_len_ns</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>op_readout_res</strong> – string, which operation to use</p></li>
 <li><p><strong>fs_int_GHz_calibration</strong> – intermediate frequencies</p></li>
+<li><p><strong>op_readout_res</strong> – string, which operation to use, defaults to self.op_readout_res_indicative</p></li>
 <li><p><strong>pulselen_ns</strong> – how long should a measurement be</p></li>
 <li><p><strong>tot_pulse_len_ns</strong> – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>fs_int_GHz_calibration, gphis = np.concatenate([gs, phis]) , amps</p>
+<dd class="field-even"><p>fints_ghz[F], gs[F], phis[F] , amplification_required[F]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.fgpa_meas">
-<em class="property">property </em><code class="sig-name descname">fgpa_meas</code><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.fgpa_meas" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
 <dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.getDC_readout_in_cfg">
 <code class="sig-name descname">getDC_readout_in_cfg</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.getDC_readout_in_cfg" title="Permalink to this definition">¶</a></dt>
-<dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">conI</span><span class="p">]</span><span class="o">.</span><span class="n">analog_inputs</span><span class="p">[</span><span class="n">portI</span><span class="p">][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DC</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">conQ</span><span class="p">]</span><span class="o">.</span><span class="n">analog_inputs</span><span class="p">[</span><span class="n">portQ</span><span class="p">][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DC</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<dd><p>Equivalent code:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">DCI</span> <span class="o">=</span> <span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">conI</span><span class="p">]</span><span class="o">.</span><span class="n">analog_inputs</span><span class="p">[</span><span class="n">portI</span><span class="p">][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">DCQ</span> <span class="o">=</span> <span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">conQ</span><span class="p">]</span><span class="o">.</span><span class="n">analog_inputs</span><span class="p">[</span><span class="n">portQ</span><span class="p">][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -758,22 +758,29 @@ screw the preamp offset… etc). cf the variable <code class="docutils literal n
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.get_meas_pulse_info">
 <code class="sig-name descname">get_meas_pulse_info</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.get_meas_pulse_info" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns critical components of the Config: res, pulse, intwc, intws</p>
+<dd><p>returns critical components of the Config affected: res, pulse, intwc, intws</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>res, pulse, intwc, intws</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.load_mixer_readout_cal_from">
 <code class="sig-name descname">load_mixer_readout_cal_from</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">loaded</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.load_mixer_readout_cal_from" title="Permalink to this definition">¶</a></dt>
-<dd><p>conforms to the format outputed from <code class="xref py py-meth docutils literal notranslate"><span class="pre">calibrate_mixer_readout()</span></code></p>
+<dd><p>converts outputed from <code class="xref py py-meth docutils literal notranslate"><span class="pre">calibrate_mixer()</span></code> and
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">calibrate_mixer_readout()</span></code> into:</p>
+<p>Dcs_monopair, (fs_GHz, gs, phis, amps_req)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>loaded</strong> – optional, output of <code class="xref py py-meth docutils literal notranslate"><span class="pre">calibrate_mixer_readout()</span></code></p></li>
+<li><p><strong>loaded</strong> – optional, output of <code class="xref py py-meth docutils literal notranslate"><span class="pre">calibrate_mixer()</span></code></p></li>
 <li><p><strong>path</strong> – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>res_cal_frequencies_GHz, Dc&lt;1 pair only&gt;, gPhis, amps</p>
+<dd class="field-even"><p>Dcs_monopair, (fs_GHz, gs, phis, amps_req)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -781,12 +788,16 @@ screw the preamp offset… etc). cf the variable <code class="docutils literal n
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.mixer_calibration_readout">
 <em class="property">property </em><code class="sig-name descname">mixer_calibration_readout</code><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.mixer_calibration_readout" title="Permalink to this definition">¶</a></dt>
-<dd><p>under the form fints_ghz, Dc&lt;1 pair only&gt;, gPhis, amps</p>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dcs_monopair, (fs_GHz, gs, phis, amps_req)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.optimise_qb_readout">
-<code class="sig-name descname">optimise_qb_readout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">fint_scan_GHz</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">df_GHz</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">meas_pulse_length_ns</span><span class="o">=</span><span class="default_value">4000</span></em>, <em class="sig-param"><span class="n">save_verif</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">SNR</span><span class="o">=</span><span class="default_value">30</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.optimise_qb_readout" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">optimise_qb_readout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fint_scan_GHz</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">df_GHz</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">meas_pulse_length_ns</span><span class="o">=</span><span class="default_value">4000</span></em>, <em class="sig-param"><span class="n">save_verif</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">SNR</span><span class="o">=</span><span class="default_value">30</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.optimise_qb_readout" title="Permalink to this definition">¶</a></dt>
 <dd><p>Here we determine the electrical delay after measurement of the resonator spectrum
 over the range defined by <code class="docutils literal notranslate"><span class="pre">f_scan_GHz</span></code> and remove it to have a correct phase behavior.
 We then determine the required measurement time N * <code class="docutils literal notranslate"><span class="pre">meas_pulse_length_ns</span></code> that allows to
@@ -819,11 +830,12 @@ or set <code class="docutils literal notranslate"><span class="pre">save_verif</
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>save_verif</strong> – specify the path string if you wish to save the verification results</p></li>
-<li><p><strong>df_GHz</strong> – the resonator shift that you wish to detect, supposing we are measuring at f_center</p></li>
-<li><p><strong>op_readout_res</strong> – the readout operation string</p></li>
 <li><p><strong>fint_scan_GHz</strong> – the frequency range over which the resonance will be detected</p></li>
+<li><p><strong>df_GHz</strong> – the resonator shift that you wish to detect, supposing we are measuring at f_center</p></li>
+<li><p><strong>op_readout_res</strong> – the readout operation string, defaults to self.op_readout_res_indicative</p></li>
 <li><p><strong>meas_pulse_length_ns</strong> – readout pulse duration, should be ~ T1</p></li>
+<li><p><strong>save_verif</strong> – specify the path string if you wish to save the verification results</p></li>
+<li><p><strong>SNR</strong> – target SNR, defaults to 30</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -838,18 +850,46 @@ or set <code class="docutils literal notranslate"><span class="pre">save_verif</
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.raw_scan_overflow_detection">
-<code class="sig-name descname">raw_scan_overflow_detection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">fint_hz</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">50000000</span></em>, <em class="sig-param"><span class="n">opx_apply_residue</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.raw_scan_overflow_detection" title="Permalink to this definition">¶</a></dt>
-<dd><p>simulates a raw signale demodulation through python</p>
+<code class="sig-name descname">raw_scan_overflow_detection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fint_hz</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">50000000</span></em>, <em class="sig-param"><span class="n">opx_apply_residue</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.raw_scan_overflow_detection" title="Permalink to this definition">¶</a></dt>
+<dd><p>simulates a raw signale demodulation through python. Use this function to check for overflows.
+Go through the execution to understand how the demodulation works.</p>
+<p><a class="reference external" href="https://qm-docs.s3.amazonaws.com/v0.4/python/demod.html">https://qm-docs.s3.amazonaws.com/v0.4/python/demod.html</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>op_readout_res</strong> – defaults to self.op_readout_res_indicative</p></li>
+<li><p><strong>fint_hz</strong> – </p></li>
+<li><p><strong>opx_apply_residue</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.readout_pulse">
+<code class="sig-name descname">readout_pulse</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.readout_pulse" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>op_readout_res</strong> – defaults to <code class="docutils literal notranslate"><span class="pre">self.op_readout_res_indicative</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>pulse[<a class="reference internal" href="qmAux.html#qmAux.config_helper.Pulse" title="qmAux.config_helper.Pulse"><code class="xref py py-class docutils literal notranslate"><span class="pre">qmAux.config_helper.Pulse</span></code></a>]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.scan_for_resonance">
-<code class="sig-name descname">scan_for_resonance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">fint_scan_GHz</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">meas_pulse_length_ns</span><span class="o">=</span><span class="default_value">4000</span></em>, <em class="sig-param"><span class="n">repetition</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.scan_for_resonance" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<code class="sig-name descname">scan_for_resonance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fint_scan_GHz</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">meas_pulse_length_ns</span><span class="o">=</span><span class="default_value">4000</span></em>, <em class="sig-param"><span class="n">repetition</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.scan_for_resonance" title="Permalink to this definition">¶</a></dt>
+<dd><p>performs a quick scan and then a Lorentzienne fit.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>op_readout_res</strong> – </p></li>
 <li><p><strong>fint_scan_GHz</strong> – </p></li>
+<li><p><strong>op_readout_res</strong> – defaults to self.op_readout_res_indicative</p></li>
 <li><p><strong>meas_pulse_length_ns</strong> – </p></li>
 <li><p><strong>repetition</strong> – </p></li>
 </ul>
@@ -863,7 +903,8 @@ or set <code class="docutils literal notranslate"><span class="pre">save_verif</
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.setDC_readout_in_cfg">
 <code class="sig-name descname">setDC_readout_in_cfg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">DC</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.setDC_readout_in_cfg" title="Permalink to this definition">¶</a></dt>
-<dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">conI</span><span class="p">]</span><span class="o">.</span><span class="n">analog_inputs</span><span class="p">[</span><span class="n">portI</span><span class="p">][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DC</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<dd><p>Equivalent code:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">conI</span><span class="p">]</span><span class="o">.</span><span class="n">analog_inputs</span><span class="p">[</span><span class="n">portI</span><span class="p">][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DC</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qx</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">singleton</span><span class="o">.</span><span class="n">controllers</span><span class="p">[</span><span class="n">conQ</span><span class="p">]</span><span class="o">.</span><span class="n">analog_inputs</span><span class="p">[</span><span class="n">portQ</span><span class="p">][</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DC</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">MwSetup</span><span class="o">.</span><span class="n">reload_cfg</span><span class="p">()</span>
 </pre></div>
@@ -872,16 +913,26 @@ or set <code class="docutils literal notranslate"><span class="pre">save_verif</
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>DC</strong> – </p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.set_meas_pulse_len">
 <code class="sig-name descname">set_meas_pulse_len</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">new_len_ns</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">voltage_range</span><span class="o">=</span><span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.set_meas_pulse_len" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns critical components of the Config affected: res, pulse, intwc, intws</p>
+<dd><p>resizes the duration, resets the integration weights so no overflow occurs.
+<a class="reference external" href="https://qm-docs.s3.amazonaws.com/v0.4/python/demod.html">https://qm-docs.s3.amazonaws.com/v0.4/python/demod.html</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>op_readout_res</strong> – optional, which operation? defaults to self.op_readout_res_indicative</p></li>
+<li><p><strong>new_len_ns</strong> – int, new length in ns</p></li>
+<li><p><strong>voltage_range</strong> – what voltage range should measurements be in, resizes integration weights without overflow</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>res, pulse, intwc, intws</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -899,6 +950,17 @@ or set <code class="docutils literal notranslate"><span class="pre">save_verif</
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>qb[<a class="reference internal" href="qmAux.html#qmAux.config_helper.QMElement" title="qmAux.config_helper.QMElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">QMElement</span></code></a>], pulse[<a class="reference internal" href="qmAux.html#qmAux.config_helper.Pulse" title="qmAux.config_helper.Pulse"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pulse</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.tune_readout_preamp_offset">
+<code class="sig-name descname">tune_readout_preamp_offset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">temp_pulse_len</span><span class="o">=</span><span class="default_value">2000</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.tune_readout_preamp_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>run this function, plug output to oscilloscope and tune pre-amp offset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>temp_pulse_len</strong> – </p>
 </dd>
 </dl>
 </dd></dl>
@@ -964,7 +1026,7 @@ or set <code class="docutils literal notranslate"><span class="pre">save_verif</
 <span id="labvieworchestra-virtual-vna-module"></span><h2>labviewOrchestra.virtual_vna module<a class="headerlink" href="#module-labviewOrchestra.virtual_vna" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="labviewOrchestra.virtual_vna.virtual_vna">
-<em class="property">class </em><code class="sig-prename descclassname">labviewOrchestra.virtual_vna.</code><code class="sig-name descname">virtual_vna</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">meas</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas" title="labviewOrchestra.mwSetupMeas.MwSetupMeas">labviewOrchestra.mwSetupMeas.MwSetupMeas</a></span></em>, <em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">labviewOrchestra.virtual_vna.</code><code class="sig-name descname">virtual_vna</code><span class="sig-paren">(</span><em class="sig-param">meas: labviewOrchestra.mwSetupMeas.MwSetupMeas</em>, <em class="sig-param">op_readout_res: str = None</em>, <em class="sig-param">atten_to_sample=&lt;function virtual_vna.&lt;lambda&gt;&gt;</em>, <em class="sig-param">gain_from_sample=&lt;function virtual_vna.&lt;lambda&gt;&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#labviewOrchestra.vnaSetup.VNASetup" title="labviewOrchestra.vnaSetup.VNASetup"><code class="xref py py-class docutils literal notranslate"><span class="pre">labviewOrchestra.vnaSetup.VNASetup</span></code></a></p>
 <p>virtual VNASetup, which wraps a <code class="xref py py-class docutils literal notranslate"><span class="pre">MwSetupMeas</span></code> object</p>
 <dl class="py attribute">
@@ -1003,14 +1065,33 @@ or set <code class="docutils literal notranslate"><span class="pre">save_verif</
 <dl class="py method">
 <dt id="labviewOrchestra.virtual_vna.virtual_vna.range_calibrate_readout">
 <code class="sig-name descname">range_calibrate_readout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flos_ghz</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.range_calibrate_readout" title="Permalink to this definition">¶</a></dt>
-<dd><p>calibrates the readout correction for a range of
-:param flos_ghz:
-:return:</p>
+<dd><p>calibrates the readout correction for a range of f_lo ‘s</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>flos_ghz</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.virtual_vna.virtual_vna.retrieve_cal">
 <code class="sig-name descname">retrieve_cal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f_lo</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.retrieve_cal" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>f_lo</strong> – which f_lo to interpolate</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>6 F-ndarrays</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.retrieve_cal_readout">
+<code class="sig-name descname">retrieve_cal_readout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f_lo</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.retrieve_cal_readout" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1062,7 +1143,7 @@ qua.IO1.int used to request new scans</p>
 <span id="labvieworchestra-vnasetup-module"></span><h2>labviewOrchestra.vnaSetup module<a class="headerlink" href="#module-labviewOrchestra.vnaSetup" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="labviewOrchestra.vnaSetup.VNASetup">
-<em class="property">class </em><code class="sig-prename descclassname">labviewOrchestra.vnaSetup.</code><code class="sig-name descname">VNASetup</code><span class="sig-paren">(</span><em class="sig-param">vna: machines.KeysightVNAx64.KeysightVNAx64</em>, <em class="sig-param">BW: float = 100</em>, <em class="sig-param">edelay=30.0</em>, <em class="sig-param">sparam=21</em>, <em class="sig-param">atten_to_sample: Callable[None</em>, <em class="sig-param">float] = &lt;function VNASetup.&lt;lambda&gt;&gt;</em>, <em class="sig-param">gain_from_sample: Callable[None</em>, <em class="sig-param">float] = &lt;function VNASetup.&lt;lambda&gt;&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.vnaSetup.VNASetup" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">labviewOrchestra.vnaSetup.</code><code class="sig-name descname">VNASetup</code><span class="sig-paren">(</span><em class="sig-param">vna: Optional[machines.KeysightVNAx64.KeysightVNAx64], BW: float = 100, edelay=30.0, sparam=21, atten_to_sample: Callable[None, float] = &lt;function VNASetup.&lt;lambda&gt;&gt;, gain_from_sample: Callable[None, float] = &lt;function VNASetup.&lt;lambda&gt;&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.vnaSetup.VNASetup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>wraps a VNA and calculates the corresponding powers</p>
 <dl class="py method">

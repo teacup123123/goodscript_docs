@@ -701,6 +701,13 @@ mark this as <code class="docutils literal notranslate"><span class="pre">cal_pr
 screw the preamp offset… etc). cf the variable <code class="docutils literal notranslate"><span class="pre">_typical_code</span></code></p>
 <p>Philosophy: DC offset is shared across the different fints, <strong>unless</strong> if IQ saturation point reached…
 meaning that we are putting a hell lot of power</p>
+<dl class="simple">
+<dt>return format:</dt><dd><ul class="simple">
+<li><p>measured_TOF, duration_meas, amps[V] = sqrt(Vi^2+Vq^2), (DCI, DCQ)</p></li>
+<li><p>(…,) +  outputs of <a class="reference internal" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.calibrate_readout_correction" title="labviewOrchestra.mwSetupMeas.MwSetupMeas.calibrate_readout_correction"><code class="xref py py-meth docutils literal notranslate"><span class="pre">calibrate_readout_correction()</span></code></a>  if <code class="docutils literal notranslate"><span class="pre">fs_int_GHz_calibration</span></code> provided</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -714,9 +721,7 @@ meaning that we are putting a hell lot of power</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Either:
-- measured_TOF, duration_meas, amps[V] = sqrt(Vi^2+Vq^2), (DCI, DCQ)
-- (…,) +  outputs of <a class="reference internal" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.calibrate_readout_correction" title="labviewOrchestra.mwSetupMeas.MwSetupMeas.calibrate_readout_correction"><code class="xref py py-meth docutils literal notranslate"><span class="pre">calibrate_readout_correction()</span></code></a>  if <code class="docutils literal notranslate"><span class="pre">fs_int_GHz_calibration</span></code> provided</p>
+<dd class="field-even"><p>cf. Return format</p>
 </dd>
 </dl>
 </dd></dl>

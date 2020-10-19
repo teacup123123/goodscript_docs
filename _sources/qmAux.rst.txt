@@ -12,6 +12,14 @@ qmAux.AuxiliaryFunctions module
    :undoc-members:
    :show-inheritance:
 
+qmAux.auto\_calibration module
+------------------------------
+
+.. automodule:: qmAux.auto_calibration
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 qmAux.config\_helper module
 ---------------------------
 
@@ -20,18 +28,10 @@ qmAux.config\_helper module
    :undoc-members:
    :show-inheritance:
 
-qmAux.hybrid\_tools module
---------------------------
+qmAux.decorators\_and\_io module
+--------------------------------
 
-.. automodule:: qmAux.hybrid_tools
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-qmAux.tools module
-------------------
-
-.. automodule:: qmAux.tools
+.. automodule:: qmAux.decorators_and_io
    :members:
    :undoc-members:
    :show-inheritance:

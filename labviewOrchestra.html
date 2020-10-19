@@ -607,10 +607,10 @@ The default program WILL be run with f_lo (read from mw_source) and f_int = <a c
 
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetup.MwSetup.resize_window">
-<code class="sig-name descname">resize_window</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fint_GHz</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.resize_window" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">resize_window</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">winsize_GHz</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetup.MwSetup.resize_window" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>fint_GHz</strong> – center the mxa marker window onto this frequency</p>
+<dd class="field-odd"><p><strong>winsize_GHz</strong> – center the mxa marker window onto this frequency</p>
 </dd>
 </dl>
 </dd></dl>
@@ -693,15 +693,34 @@ The default program WILL be run with f_lo (read from mw_source) and f_int = <a c
 <em class="property">class </em><code class="sig-prename descclassname">labviewOrchestra.mwSetupMeas.</code><code class="sig-name descname">MwSetupMeas</code><span class="sig-paren">(</span><em class="sig-param">mw: Union[machines.KeysightE8257x64.KeysightE8257x64, machines.RohdeSMABx64.RohdeSMABx64], mw_pow: float, switch: Union[machines.microBILTTopStageSwitchesx64.microBILTTopStageSwitchesx64, machines.microBILTBotStageSwitchesx64.microBILTBotStageSwitchesx64], ps: Union[machines.microBILTPulsar1x64.microBILTPulsar1x64, machines.microBILTPulsar2x64.microBILTPulsar2x64, machines.microBILTPulsar3x64.microBILTPulsar3x64, machines.microBILTPulsar4x64.microBILTPulsar4x64], cal_with: Tuple[str, qmAux.config_helper.QMElement], mxa: machines.KeysightMXAx64.KeysightMXAx64, zva: Callable[Union[numpy.ndarray, float], Union[numpy.ndarray, float]], directional_coupler: Callable[Union[numpy.ndarray, float], Union[numpy.ndarray, float]] = &lt;function MwSetupMeas.&lt;lambda&gt;&gt;, atten_to_sample: Callable[Union[numpy.ndarray, float], Union[numpy.ndarray, float]] = &lt;function MwSetupMeas.&lt;lambda&gt;&gt;, awg: machines.Taborawg1284Cx64.Taborawg1284Cx64 = None, op_readout_res_indicative: str = None</em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#labviewOrchestra.mwSetup.MwSetup" title="labviewOrchestra.mwSetup.MwSetup"><code class="xref py py-class docutils literal notranslate"><span class="pre">labviewOrchestra.mwSetup.MwSetup</span></code></a></p>
 <p>class including additional funcionalities for readout</p>
+<dl class="py attribute">
+<dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.POWER_BYPASS">
+<code class="sig-name descname">POWER_BYPASS</code><em class="property"> = -50</em><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.POWER_BYPASS" title="Permalink to this definition">¶</a></dt>
+<dd><p>pmxa set target when fridge bypassed</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.POWER_UNKNOWN">
+<code class="sig-name descname">POWER_UNKNOWN</code><em class="property"> = -35</em><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.POWER_UNKNOWN" title="Permalink to this definition">¶</a></dt>
+<dd><p>pmxa set target before knowing whether bypassed fridge or not</p>
+</dd></dl>
+
 <dl class="py method">
 <dt id="labviewOrchestra.mwSetupMeas.MwSetupMeas.calibrate_readout">
-<code class="sig-name descname">calibrate_readout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f_int_GHz</span></em>, <em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">thresh_factor</span><span class="o">=</span><span class="default_value">0.6321205588285577</span></em>, <em class="sig-param"><span class="n">start_at</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">temp_pulse_len</span><span class="o">=</span><span class="default_value">2000</span></em>, <em class="sig-param"><span class="n">cal_preamp_or_benchmark</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">fs_int_GHz_calibration</span><span class="p">:</span> <span class="n">numpy.ndarray</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.calibrate_readout" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">calibrate_readout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fint_GHz</span></em>, <em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">thresh_factor</span><span class="o">=</span><span class="default_value">0.6321205588285577</span></em>, <em class="sig-param"><span class="n">start_at</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">temp_pulse_len</span><span class="o">=</span><span class="default_value">2000</span></em>, <em class="sig-param"><span class="n">cal_preamp_or_benchmark</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">fs_int_GHz_calibration</span><span class="p">:</span> <span class="n">numpy.ndarray</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.calibrate_readout" title="Permalink to this definition">¶</a></dt>
 <dd><p>measures the delay defined by the <code class="docutils literal notranslate"><span class="pre">THRESH_FACTOR</span></code> * peak signal amplitude.
 mark this as <code class="docutils literal notranslate"><span class="pre">cal_preamp_or_benchmark</span></code> as <code class="docutils literal notranslate"><span class="pre">True</span></code> if you want to benchmark correction (lo leakaage…,
 screw the preamp offset… etc). cf the variable <code class="docutils literal notranslate"><span class="pre">_typical_code</span></code></p>
 <p>Philosophy: DC offset is shared across the different fints, <strong>unless</strong> if IQ saturation point reached…
 meaning that we are putting a hell lot of power</p>
 <dl class="simple">
+<dt>Side-Effects:</dt><dd><ul class="simple">
+<li><p>the measurement pulse will have an updated length, as well as renormalized integration weights</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">res.time_of_flight</span></code> in the <code class="docutils literal notranslate"><span class="pre">cfg_dict</span></code> will be adjusted</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output_res.offset</span></code> in the <code class="docutils literal notranslate"><span class="pre">cfg_dict</span></code> will be adjusted</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">switch_stage.output</span></code> will be turned on after returning</p></li>
+</ul>
+</dd>
 <dt>return format:</dt><dd><ul class="simple">
 <li><p>measured_TOF, duration_meas, amps[V] = sqrt(Vi^2+Vq^2), (DCI, DCQ)</p></li>
 <li><p>(…,) +  outputs of <a class="reference internal" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas.calibrate_readout_correction" title="labviewOrchestra.mwSetupMeas.MwSetupMeas.calibrate_readout_correction"><code class="xref py py-meth docutils literal notranslate"><span class="pre">calibrate_readout_correction()</span></code></a>  if <code class="docutils literal notranslate"><span class="pre">fs_int_GHz_calibration</span></code> provided</p></li>
@@ -711,7 +730,7 @@ meaning that we are putting a hell lot of power</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f_int_GHz</strong> – which fint_hz to use to calculate time of flight</p></li>
+<li><p><strong>fint_GHz</strong> – which fint_hz to use to calculate time of flight</p></li>
 <li><p><strong>op_readout_res</strong> – name of the readout operation as specified in the Config</p></li>
 <li><p><strong>thresh_factor</strong> – see above</p></li>
 <li><p><strong>cal_preamp_or_benchmark</strong> – mark this as <code class="docutils literal notranslate"><span class="pre">True</span></code> if you want to</p></li>
@@ -1031,18 +1050,18 @@ Go through the execution to understand how the demodulation works.</p>
 <span id="labvieworchestra-virtual-vna-module"></span><h2>labviewOrchestra.virtual_vna module<a class="headerlink" href="#module-labviewOrchestra.virtual_vna" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="labviewOrchestra.virtual_vna.virtual_vna">
-<em class="property">class </em><code class="sig-prename descclassname">labviewOrchestra.virtual_vna.</code><code class="sig-name descname">virtual_vna</code><span class="sig-paren">(</span><em class="sig-param">meas: labviewOrchestra.mwSetupMeas.MwSetupMeas</em>, <em class="sig-param">op_readout_res: str = None</em>, <em class="sig-param">atten_to_sample=&lt;function virtual_vna.&lt;lambda&gt;&gt;</em>, <em class="sig-param">gain_from_sample=&lt;function virtual_vna.&lt;lambda&gt;&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">labviewOrchestra.virtual_vna.</code><code class="sig-name descname">virtual_vna</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">meas</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#labviewOrchestra.mwSetupMeas.MwSetupMeas" title="labviewOrchestra.mwSetupMeas.MwSetupMeas">labviewOrchestra.mwSetupMeas.MwSetupMeas</a></span></em>, <em class="sig-param"><span class="n">pump_to_turn_off</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#labviewOrchestra.mwSetup.MwSetup" title="labviewOrchestra.mwSetup.MwSetup">labviewOrchestra.mwSetup.MwSetup</a></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">op_readout_res</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#labviewOrchestra.vnaSetup.VNASetup" title="labviewOrchestra.vnaSetup.VNASetup"><code class="xref py py-class docutils literal notranslate"><span class="pre">labviewOrchestra.vnaSetup.VNASetup</span></code></a></p>
 <p>virtual VNASetup, which wraps a <code class="xref py py-class docutils literal notranslate"><span class="pre">MwSetupMeas</span></code> object</p>
 <dl class="py attribute">
 <dt id="labviewOrchestra.virtual_vna.virtual_vna.FIXED_RANGE_GHZ">
-<code class="sig-name descname">FIXED_RANGE_GHZ</code><em class="property"> = array([-0.2       , -0.19322034, -0.18644068, -0.17966102, -0.17288136,        -0.16610169, -0.15932203, -0.15254237, -0.14576271, -0.13898305,        -0.13220339, -0.12542373, -0.11864407, -0.11186441, -0.10508475,        -0.09830508, -0.09152542, -0.08474576, -0.0779661 , -0.07118644,        -0.06440678, -0.05762712, -0.05084746, -0.0440678 , -0.03728814,        -0.03050847, -0.02372881, -0.01694915, -0.01016949, -0.00338983,         0.00338983,  0.01016949,  0.01694915,  0.02372881,  0.03050847,         0.03728814,  0.0440678 ,  0.05084746,  0.05762712,  0.06440678,         0.07118644,  0.0779661 ,  0.08474576,  0.09152542,  0.09830508,         0.10508475,  0.11186441,  0.11864407,  0.12542373,  0.13220339,         0.13898305,  0.14576271,  0.15254237,  0.15932203,  0.16610169,         0.17288136,  0.17966102,  0.18644068,  0.19322034,  0.2       ])</em><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.FIXED_RANGE_GHZ" title="Permalink to this definition">¶</a></dt>
-<dd><p>np.linspace(-MAX_SPAN_GHZ / 2, MAX_SPAN_GHZ / 2, 60)</p>
+<code class="sig-name descname">FIXED_RANGE_GHZ</code><em class="property"> = array([-0.15, -0.13, -0.11, -0.09, -0.07, -0.05, -0.03, -0.01,  0.01,         0.03,  0.05,  0.07,  0.09,  0.11,  0.13,  0.15])</em><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.FIXED_RANGE_GHZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>np.linspace(-MAX_SPAN_GHZ / 2, MAX_SPAN_GHZ / 2, 16)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="labviewOrchestra.virtual_vna.virtual_vna.MAX_SPAN_GHZ">
-<code class="sig-name descname">MAX_SPAN_GHZ</code><em class="property"> = 0.4</em><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.MAX_SPAN_GHZ" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">MAX_SPAN_GHZ</code><em class="property"> = 0.3</em><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.MAX_SPAN_GHZ" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1050,6 +1069,11 @@ Go through the execution to understand how the demodulation works.</p>
 <code class="sig-name descname">extract_phase</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.extract_phase" title="Permalink to this definition">¶</a></dt>
 <dd><p>get function for ‘Extract Phase’</p>
 </dd></dl>
+
+<dl class="py method">
+<dt id="labviewOrchestra.virtual_vna.virtual_vna.fcenter_ghz">
+<em class="property">property </em><code class="sig-name descname">fcenter_ghz</code><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.fcenter_ghz" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.virtual_vna.virtual_vna.get_scan_amplitude">
@@ -1097,7 +1121,15 @@ Go through the execution to understand how the demodulation works.</p>
 <dl class="py method">
 <dt id="labviewOrchestra.virtual_vna.virtual_vna.retrieve_cal_readout">
 <code class="sig-name descname">retrieve_cal_readout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f_lo</span></em><span class="sig-paren">)</span><a class="headerlink" href="#labviewOrchestra.virtual_vna.virtual_vna.retrieve_cal_readout" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>f_lo</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dcs_monopair, (fs_GHz, gs, phis, amps_req)</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="labviewOrchestra.virtual_vna.virtual_vna.set_BW">
